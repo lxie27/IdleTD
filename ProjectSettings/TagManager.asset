@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Tower
+  - Mob
   layers:
   - Default
   - TransparentFX
@@ -40,4 +42,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Mobs
+    uniqueID: 2824119071
+    locked: 0
+  - name: Towers
+    uniqueID: 1009202191
     locked: 0
