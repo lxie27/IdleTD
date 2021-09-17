@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Tower
   - Mob
+  - Grid
+  - Path
   layers:
   - Default
   - TransparentFX
