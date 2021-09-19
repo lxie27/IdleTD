@@ -6,18 +6,17 @@ using UnityEditor.Animations;
 public class Mob : MonoBehaviour
 {
     public int health = 10;
-    public float speed = .01f;
+    public float speed = 20f;
     AnimatorController ac;
 
     public bool isMoving = false;
-    //bool finished = false;
     List<Vector2> path;
     int currentCell;
-    Vector2 startPosition, nextPosition, endPosition;
-
+    Vector2 nextPosition, endPosition;
 
     void Start()
     {
+        currentCell = 0;
         GameObject grid = GameObject.FindWithTag("Grid");
         if (grid == null)
         {
@@ -32,55 +31,30 @@ public class Mob : MonoBehaviour
         {
             Debug.Log("No path found.");
         }
-        else
-        {
-            for(int i = 0; i < path.Count; i++)
-            {
-                Debug.Log(path[i].x + " , " + path[i].y);
-            }
-        }
 
-        //Move to starting position (first cell in path)
-        startPosition = path[0];
-        this.transform.position = startPosition;
-        currentCell = 0;
+        this.transform.position = path[currentCell];
         nextPosition = path[currentCell + 1];
-
-        //Set end position to last cell (ORDER MATTERS WHEN GENERATING PATH)
         endPosition = path[path.Count - 1];
-        
+
     }
 
     void Update()
     {
+        //Debug.Log("Current position: " + this.transform.position + " , Next position: " + nextPosition);
         if ((Vector2)this.transform.position != endPosition)
         {
             if ((Vector2)this.transform.position != nextPosition)
             {
-                StartCoroutine(MoveToPoint(nextPosition));
+                this.transform.position = Vector2.MoveTowards(this.transform.position, nextPosition, speed * Time.deltaTime); // Move objectToMove closer to b
             }
             else
             {
-                nextPosition = path[currentCell++];
+                nextPosition = path[++currentCell];
             }
         }
         else
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
-    }
-
-    public IEnumerator MoveToPoint(Vector2 end)
-    {
-        float step = (speed / ((Vector2)this.transform.position - end).magnitude) * Time.fixedDeltaTime;
-        float t = 0;
-        while (t <= 1.0f)
-        {
-            t += step; // Goes from 0 to 1, incrementing by step each time
-            this.transform.position = Vector2.Lerp((Vector2)this.transform.position, end, t); // Move objectToMove closer to b
-            yield return new WaitForFixedUpdate();         // Leave the routine and return here in the next frame
-        }
-
-        this.transform.position = end;
     }
 }
