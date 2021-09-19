@@ -7,7 +7,7 @@ public enum Direction { NONE = 0, UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4 };
 
 public class Mob : MonoBehaviour
 {
-    public int health = 10;
+    public float health = 10;
     float speed = 3f;
 
     public bool isMoving = false;
@@ -130,29 +130,8 @@ public class Mob : MonoBehaviour
         anim.SetInteger("Direction", (int)currentDirection);
     }
 
-    /*
-    Animation GetAnimation()
+    float TakeDamage(float damage)
     {
-        if (currentDirection == Direction.UP)
-        {
-            return states.
-        }
-        else if (currentDirection == Direction.UP)
-        {
-
-        }
-        else if (currentDirection == Direction.UP)
-        {
-
-        }
-        else if (currentDirection == Direction.UP)
-        {
-
-        }
-        else
-        {
-            Debug.Log("Current direction is NONE, no animation");
-            return null;
-        }
-    }*/
+        return health -= damage;
+    }
 }
