@@ -8904,12 +8904,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mobs:
   - {fileID: 9128896965300138231, guid: 23bd650f1059a06489fd8af3251e1c59, type: 3}
-  - {fileID: 9128896965300138231, guid: 23bd650f1059a06489fd8af3251e1c59, type: 3}
-  - {fileID: 9128896965300138231, guid: 23bd650f1059a06489fd8af3251e1c59, type: 3}
-  - {fileID: 9128896965300138231, guid: 23bd650f1059a06489fd8af3251e1c59, type: 3}
-  - {fileID: 9128896965300138231, guid: 23bd650f1059a06489fd8af3251e1c59, type: 3}
-  - {fileID: 9128896965300138231, guid: 23bd650f1059a06489fd8af3251e1c59, type: 3}
-  - {fileID: 9128896965300138231, guid: 23bd650f1059a06489fd8af3251e1c59, type: 3}
   spawnDelay: 0.1
 --- !u!4 &791567321
 Transform:
