@@ -11,9 +11,6 @@ public class MapManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        Debug.Log("SPAWNING 3 MOBS");
-        StartCoroutine(SpawnMobs());
         
     }
 
@@ -22,18 +19,4 @@ public class MapManager : MonoBehaviour
     {
 
     }
-
-    //Spawn then move
-    IEnumerator SpawnMobs()
-    {
-        foreach (var mob in totalMobs)
-        {
-            Debug.Log("Spawning a mob");
-            Instantiate(mob, pathStartPosition, Quaternion.identity, this.transform);
-            mob.isMoving = true;
-            activeMobs.Add(mob);
-            yield return new WaitForSeconds(1);
-        }
-    }
-
 }
