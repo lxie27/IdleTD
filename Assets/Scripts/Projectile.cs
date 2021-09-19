@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     public float radius = 1f; // Collision radius.
     float radiusSq; // Radius squared; optimisation.
     Transform target; // Who we are homing at.
+    float damage;
 
     void OnEnable()
     {
@@ -32,15 +33,28 @@ public class Projectile : MonoBehaviour
         // Destroy the projectile if it is close to the target.
         if (direction.sqrMagnitude < radiusSq)
         {
+            GameObject mob = transform.parent.gameObject;
+            if (mob.TryGetComponent(out Mob m))
+            {
+                Debug.Log("Dealt " + damage + " to enemy");
+                m.TakeDamage(damage);
+            }
+            else
+            {
+                Debug.Log("Couldn't find mob's mob");
+            }
+
             Destroy(gameObject);
             // Write your own code to spawn an explosion / splat effect.
             // Write your own code to deal damage to the <target>.
+            
         }
     }
 
     // So that other scripts can use Projectile.Spawn to spawn a projectile.
     public static Projectile Spawn(GameObject prefab, Vector3 position, Quaternion rotation, Transform target)
     {
+        Debug.Log("Spawning projectile");
         // Spawn a GameObject based on a prefab, and returns its Projectile component.
         GameObject go = Instantiate(prefab, position, rotation);
         Projectile p = go.GetComponent<Projectile>();

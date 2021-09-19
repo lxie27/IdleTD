@@ -25,7 +25,6 @@ public class MobSpawner : MonoBehaviour
     {
         foreach (var mob in mobs)
         {
-            Debug.Log("Spawning a mob");
             Instantiate(mob, this.transform.position, Quaternion.identity);
             yield return new WaitForSeconds(delay);
         }

@@ -62,22 +62,6 @@ public class Mob : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        if (anim.GetInteger("Direction") == 1)
-        {
-            Debug.Log("Up");
-        }
-        else if (anim.GetInteger("Direction") == 2)
-        {
-            Debug.Log("Down");
-        }
-        else if (anim.GetInteger("Direction") == 3)
-        {
-            Debug.Log("Left");
-        }
-        else if (anim.GetInteger("Direction") == 4)
-        {
-            Debug.Log("Right");
-        }
     }
 
     void Move()
@@ -130,8 +114,15 @@ public class Mob : MonoBehaviour
         anim.SetInteger("Direction", (int)currentDirection);
     }
 
-    float TakeDamage(float damage)
+    public float TakeDamage(float damage)
     {
         return health -= damage;
+    }
+
+    void OnDrawGizmos()
+    {
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(transform.position, transform.lossyScale);
     }
 }
