@@ -22,7 +22,7 @@ public static class ProjectileFactory
     /// <returns name="go">     - pointer to the spawned projectile </returns>
     public static GameObject Spawn(GameObject proj, Transform spawner, Transform target)
     {
-        GameObject go = GameObject.Instantiate(baseProjectile, spawner, true);
+        GameObject go = GameObject.Instantiate(baseProjectile, spawner);
         if (go.TryGetComponent<BaseProjectile>(out var bp))
         {
             bp.target = target.gameObject;

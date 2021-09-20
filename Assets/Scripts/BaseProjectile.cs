@@ -23,14 +23,18 @@ public class BaseProjectile : MonoBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
-        if (!target)
+        if (target != null)
+        {
+            // Move ourselves towards the target at every frame.
+            Vector3 direction = target.transform.position - transform.position;
+            transform.position += direction.normalized * projectileSpeed * Time.deltaTime;
+        }
+        else
         {
             Destroy(gameObject);
         }
 
-        // Move ourselves towards the target at every frame.
-        Vector3 direction = target.transform.position - transform.position;
-        transform.position += direction.normalized * projectileSpeed * Time.deltaTime;
+        
     }
 
     public virtual void OnTriggerEnter2D(Collider2D other)
