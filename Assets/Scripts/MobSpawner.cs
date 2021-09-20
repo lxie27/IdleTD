@@ -5,7 +5,7 @@ using UnityEngine;
 public class MobSpawner : MonoBehaviour
 {
     public List<Mob> mobs;
-    public float spawnDelay = .02f;
+    public float spawnDelay = 1f;
 
     // Start is called before the first frame update
     IEnumerator Start()

@@ -9,10 +9,11 @@ public class Tower : MonoBehaviour
     float attackCD = .5f;
     float currentCD = -1f;
 
-    GameObject projectile;
+    GameObject projectilePrefab;
     GameObject currentTarget;
 
     CircleCollider2D coll;
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,12 +21,15 @@ public class Tower : MonoBehaviour
         //Might change this in the future to be more generic
         coll = this.gameObject.GetComponent<CircleCollider2D>();
         coll.radius = radius;
-        projectile = Instantiate(Resources.Load("PH_Projectile", typeof(GameObject))) as GameObject;
-        if (projectile == null)
+        projectilePrefab = Instantiate(Resources.Load("Projectiles/PH_Projectile", typeof(GameObject))) as GameObject;
+        if (projectilePrefab == null)
         {
             Debug.Log("Failed to load projectile");
         }
-
+        else
+        {
+            Debug.Log("Loaded " + projectilePrefab.name);
+        }
     }
 
     // Update is called once per frame
@@ -39,7 +43,24 @@ public class Tower : MonoBehaviour
         {
             AttackOnCooldown();
         }
-        
+    }
+
+    void AttackOnCooldown()
+    {
+        if (Time.time > currentCD)
+        {
+            currentCD = Time.time + attackCD;
+            GameObject go = Instantiate(projectilePrefab, 
+                transform.gameObject.GetComponent("ProjectileSource").transform.position, 
+                transform.rotation);
+            BaseProjectile proj = go.GetComponent<BaseProjectile>();
+            proj.target = currentTarget; proj.damage = damage;
+        }
+    }    
+
+    void SetProjectile(GameObject proj)
+    {
+        projectilePrefab = proj;
     }
 
     // TODO attacking preferences
@@ -80,20 +101,5 @@ public class Tower : MonoBehaviour
     {
         StopCoroutine("AttackOnCooldown");
         currentTarget = null;
-    }
-
-    void AttackOnCooldown()
-    {
-        if (Time.time > currentCD)
-        {
-            currentCD = Time.time + attackCD;
-            Debug.Log("Attacking.");
-            Projectile.Spawn(
-                projectile, 
-                this.gameObject.GetComponent("ProjectileSource").transform.position,
-                 Quaternion.identity, currentTarget.transform);
-        }
-        
-        
     }
 }

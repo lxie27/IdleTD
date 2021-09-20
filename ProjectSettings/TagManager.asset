@@ -8,6 +8,7 @@ TagManager:
   - Mob
   - Grid
   - Path
+  - Projectile
   layers:
   - Default
   - TransparentFX

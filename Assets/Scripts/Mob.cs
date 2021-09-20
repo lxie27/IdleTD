@@ -8,17 +8,22 @@ public enum Direction { NONE = 0, UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4 };
 public class Mob : MonoBehaviour
 {
     public float health = 10;
-    float speed = 3f;
+    public float speed = 3f;
 
     public bool isMoving = false;
-    List<Vector2> path;
+    public List<Vector2> path;
     int currentCell;
     Vector2 nextPosition, endPosition;
 
     Direction currentDirection;
     Animator anim;
     AnimatorController ac;
-    void Start()
+    public virtual void Start()
+    {
+        MobInitialization();
+    }
+
+    public void MobInitialization()
     {
         currentCell = 0;
         GameObject grid = GameObject.FindWithTag("Grid");
@@ -52,7 +57,7 @@ public class Mob : MonoBehaviour
         }
     }
 
-    void Update()
+    public virtual void Update()
     {
         if ((Vector2)this.transform.position != endPosition)
         {
@@ -119,7 +124,7 @@ public class Mob : MonoBehaviour
         return health -= damage;
     }
 
-    void OnDrawGizmos()
+    public virtual void OnDrawGizmos()
     {
         // Draw a yellow sphere at the transform's position
         Gizmos.color = Color.yellow;

@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3964438198795890327}
   - component: {fileID: 5685120013249602110}
-  - component: {fileID: -4834850181098060286}
+  - component: {fileID: -1613440536916710601}
+  - component: {fileID: 5064408067956951048}
   m_Layer: 0
   m_Name: PH_Projectile
   m_TagString: Untagged
@@ -84,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-4834850181098060286
+--- !u!114 &-1613440536916710601
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,8 +94,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 8662503194678206820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 944a4c2e6c404604288b6db611eb837b, type: 3}
+  m_Script: {fileID: 11500000, guid: 64a7ef161535bbf4d8334791ad47a802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8.5
+  speed: 1
   radius: 1
+--- !u!58 &5064408067956951048
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8662503194678206820}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
