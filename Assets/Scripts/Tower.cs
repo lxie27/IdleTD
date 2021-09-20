@@ -6,7 +6,7 @@ public class Tower : MonoBehaviour
 {
     public float damage;
     public float radius;
-    float attackCD = .5f;
+    float attackCD = .2f;
     float currentCD = -1f;
 
     GameObject projectilePrefab;
@@ -14,32 +14,24 @@ public class Tower : MonoBehaviour
 
     CircleCollider2D coll;
 
+    Transform projectileSource;
 
     // Start is called before the first frame update
     void Start()
     {
-        //Might change this in the future to be more generic
         coll = this.gameObject.GetComponent<CircleCollider2D>();
         coll.radius = radius;
-        projectilePrefab = Instantiate(Resources.Load("Projectiles/PH_Projectile", typeof(GameObject))) as GameObject;
-        if (projectilePrefab == null)
+        projectileSource = this.gameObject.transform.Find("ProjectileSource") as Transform;
+        if (projectileSource == null)
         {
-            Debug.Log("Failed to load projectile");
-        }
-        else
-        {
-            Debug.Log("Loaded " + projectilePrefab.name);
+            Debug.Log("Didn't find projectile source");
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentTarget == null)
-        {
-            return;
-        }
-        else
+        if (currentTarget != null)
         {
             AttackOnCooldown();
         }
@@ -50,17 +42,8 @@ public class Tower : MonoBehaviour
         if (Time.time > currentCD)
         {
             currentCD = Time.time + attackCD;
-            GameObject go = Instantiate(projectilePrefab, 
-                transform.gameObject.GetComponent("ProjectileSource").transform.position, 
-                transform.rotation);
-            BaseProjectile proj = go.GetComponent<BaseProjectile>();
-            proj.target = currentTarget; proj.damage = damage;
+            ProjectileFactory.Spawn(projectilePrefab, projectileSource, currentTarget.transform);
         }
-    }    
-
-    void SetProjectile(GameObject proj)
-    {
-        projectilePrefab = proj;
     }
 
     // TODO attacking preferences
@@ -99,7 +82,6 @@ public class Tower : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        StopCoroutine("AttackOnCooldown");
         currentTarget = null;
     }
 }

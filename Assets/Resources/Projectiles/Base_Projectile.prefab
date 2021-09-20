@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1613440536916710601}
   - component: {fileID: 5064408067956951048}
   m_Layer: 0
-  m_Name: PH_Projectile
+  m_Name: Base_Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8662503194678206820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.418, y: 5.282, z: -36.492096}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a7ef161535bbf4d8334791ad47a802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  radius: 1
+  damage: 0
+  target: {fileID: 0}
 --- !u!58 &5064408067956951048
 CircleCollider2D:
   m_ObjectHideFlags: 0

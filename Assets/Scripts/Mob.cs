@@ -67,6 +67,16 @@ public class Mob : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        if (health <= 0)
+        {
+            MobKilled();
+        }
+    }
+
+    //  Function to contain any scorekeeping when mob dies
+    public virtual void MobKilled()
+    {
+        Destroy(this.gameObject);
     }
 
     void Move()
