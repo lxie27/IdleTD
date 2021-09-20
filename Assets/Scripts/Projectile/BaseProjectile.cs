@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class BaseProjectile : MonoBehaviour
 {
-    public float projectileSpeed;
-    public float damage;
     public GameObject target;
-    public float radius;
+    public GameObject explosion;
+
+    protected float projectileSpeed;
+    protected float damage;
+    protected float radius;
 
     public virtual void Start()
     {
         if (projectileSpeed == 0)
         {
-            projectileSpeed = 10f;
+            projectileSpeed = 20f;
         }
         if (damage == 0)
         {
-            damage = 2f;
+            damage = 5f;
+        }
+
+        if (explosion == null)
+        {
+            explosion = Resources.Load("Projectiles/Base_Explosion") as GameObject;
         }
     }
     // Update is called once per frame
@@ -33,18 +40,16 @@ public class BaseProjectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        
     }
 
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject == target)
         {
-            Debug.Log("Projectile hit target");
             other.GetComponent<Mob>().TakeDamage(damage);
+            GameObject ex = Instantiate(explosion, this.transform.position, Quaternion.identity);
+
             Destroy(gameObject);
-            // TODO spawn an explosion / splat effect.
         }
     }
 }

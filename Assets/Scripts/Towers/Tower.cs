@@ -6,8 +6,8 @@ public class Tower : MonoBehaviour
 {
     public float damage;
     public float radius;
-    float attackCD = .2f;
-    float currentCD = -1f;
+    float attackCD = 1f;
+    float currentCD = -5f;
 
     GameObject projectilePrefab;
     GameObject currentTarget;
@@ -49,7 +49,6 @@ public class Tower : MonoBehaviour
     // TODO attacking preferences
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Trigger enter");
         if (currentTarget == null)
         {
             currentTarget = collision.gameObject;
