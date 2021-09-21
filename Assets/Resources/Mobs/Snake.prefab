@@ -103,7 +103,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.59
+  m_Radius: 0.41
 --- !u!50 &4726367185700662728
 Rigidbody2D:
   serializedVersion: 4
@@ -140,6 +140,7 @@ MonoBehaviour:
   health: 10
   speed: 3
   isMoving: 0
+  path: []
 --- !u!95 &4726367185700662732
 Animator:
   serializedVersion: 3

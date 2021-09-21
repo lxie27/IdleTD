@@ -19,7 +19,7 @@ public class BaseProjectile : MonoBehaviour
         }
         if (damage == 0)
         {
-            damage = 5f;
+            damage = 1f;
         }
 
         if (explosion == null)
