@@ -11,15 +11,15 @@ public class MouseHover : MonoBehaviour
     Grid grid;
     GridMap gridmap;
     public Tilemap interactableTiles;
+    public Tilemap towerTiles;
     Tilemap interactableTilesCopy;
-    Color original = Color.white;
+    Color originalColor = Color.white;
 
     // Start is called before the first frame update
     void Start()
     {
         grid = this.gameObject.GetComponent<Grid>();
         gridmap = grid.GetComponent<GridMap>();
-        interactableTilesCopy = interactableTiles;
     }
 
     // Update is called once per frame
@@ -36,21 +36,16 @@ public class MouseHover : MonoBehaviour
 
                 if (highlightedTile != null)
                 {
-                    Tile originalTile = interactableTilesCopy.GetTile<Tile>((Vector3Int)mousePos);
-                    //Reset previous tile
-                    SetTileColor(original, previousPos, interactableTiles);
-
-                    //Highlight current tile
-
                     Color highlight = new Color(1f, .92f, .016f, 1f);
+                    SetTileColor(originalColor, previousPos, interactableTiles);
                     SetTileColor(highlight, mousePos, interactableTiles);
-
                     previousPos = mousePos;
                 }
             }
         }
         else
         {
+            SetTileColor(originalColor, previousPos, interactableTiles);
             highlightedTile = null;
         }
     }

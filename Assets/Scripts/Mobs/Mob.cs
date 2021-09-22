@@ -25,6 +25,7 @@ public class Mob : MonoBehaviour
 
     public void MobInitialization()
     {
+        this.gameObject.tag = "Mob";
         currentCell = 0;
         GameObject grid = GameObject.FindWithTag("Grid");
         if (grid == null)
@@ -136,7 +137,6 @@ public class Mob : MonoBehaviour
 
     public virtual void OnDrawGizmos()
     {
-        // Draw a yellow sphere at the transform's position
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(transform.position, transform.lossyScale);
     }

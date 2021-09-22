@@ -49,21 +49,21 @@ public class Tower : MonoBehaviour
     // TODO attacking preferences
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (currentTarget == null)
+        if (collision.tag == "Mob")
         {
-            currentTarget = collision.gameObject;
-        }
-        else
-        {
-            if (Vector2.Distance(collision.transform.position, this.gameObject.transform.position) < 
-                Vector2.Distance(currentTarget.transform.position, this.gameObject.transform.position))
-            {
-                currentTarget = collision.gameObject;
-            }
+            TargetSelection(collision);
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Mob")
+        {
+            TargetSelection(collision);
+        }
+    }
+
+    void TargetSelection(Collider2D collision)
     {
         if (currentTarget == null)
         {
@@ -82,5 +82,11 @@ public class Tower : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         currentTarget = null;
+    }
+
+    public virtual void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }
