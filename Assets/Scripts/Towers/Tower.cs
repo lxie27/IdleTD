@@ -6,7 +6,7 @@ public class Tower : MonoBehaviour
 {
     public float damage;
     public float radius;
-    float attackCD = 1f;
+    public float attackSpeed = 1f;
     float currentCD = -5f;
 
     GameObject projectilePrefab;
@@ -15,6 +15,8 @@ public class Tower : MonoBehaviour
     CircleCollider2D coll;
 
     Transform projectileSource;
+
+    List<Gem> gems;
 
     // Start is called before the first frame update
     void Start()
@@ -41,8 +43,16 @@ public class Tower : MonoBehaviour
     {
         if (Time.time > currentCD)
         {
-            currentCD = Time.time + attackCD;
+            currentCD = Time.time + attackSpeed;
             ProjectileFactory.Spawn(projectilePrefab, projectileSource, currentTarget.transform);
+        }
+    }
+
+    void UpdateModifiers()
+    {
+        foreach (var gem in gems)
+        {
+            gem.ApplyModifiers(this.gameObject.GetComponent<Tower>());
         }
     }
 
