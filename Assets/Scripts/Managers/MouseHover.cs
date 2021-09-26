@@ -5,21 +5,20 @@ using UnityEngine.Tilemaps;
 
 public class MouseHover : MonoBehaviour
 {
-    Vector2Int mousePos;
+    public Vector2Int mousePos;
     Vector2Int previousPos;
 
     Grid grid;
-    GridMap gridmap;
     public Tilemap interactableTiles;
     public Tilemap towerTiles;
-    Tilemap interactableTilesCopy;
     Color originalColor = Color.white;
+    Color highlight = new Color(1f, .92f, .016f, 1f);
 
+    public Tile highlightedTile;
     // Start is called before the first frame update
     void Start()
     {
         grid = this.gameObject.GetComponent<Grid>();
-        gridmap = grid.GetComponent<GridMap>();
     }
 
     // Update is called once per frame
@@ -27,7 +26,6 @@ public class MouseHover : MonoBehaviour
     {
         // Mouse over -> highlight tile
         mousePos = GetMousePosition();
-        Tile highlightedTile;
         if (interactableTiles.cellBounds.Contains((Vector3Int)mousePos))
         {
             if (mousePos != previousPos)
@@ -36,7 +34,6 @@ public class MouseHover : MonoBehaviour
 
                 if (highlightedTile != null)
                 {
-                    Color highlight = new Color(1f, .92f, .016f, 1f);
                     SetTileColor(originalColor, previousPos, interactableTiles);
                     SetTileColor(highlight, mousePos, interactableTiles);
                     previousPos = mousePos;

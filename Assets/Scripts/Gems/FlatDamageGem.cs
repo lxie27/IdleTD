@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackDamageGem : Gem
+public class FlatDamageGem : Gem
 {
     public float attackIncrease;
 
-    public AttackDamageGem(float attackIncrease)
+    public FlatDamageGem(float attackIncrease)
     {
         this.attackIncrease = attackIncrease;
     }
@@ -15,7 +15,7 @@ public class AttackDamageGem : Gem
     {
         if (!isApplied)
         {
-            tower.damage *= attackIncrease;
+            tower.damage += attackIncrease;
             isApplied = true;
         }
     }

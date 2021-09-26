@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class BaseProjectile : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class BaseProjectile : MonoBehaviour
 
         if (explosion == null)
         {
-            explosion = Resources.Load("Projectiles/Base_Explosion") as GameObject;
+            explosion = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Projectiles/Base_Explosion", typeof(GameObject));
         }
     }
     // Update is called once per frame

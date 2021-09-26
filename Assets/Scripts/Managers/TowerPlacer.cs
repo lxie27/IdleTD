@@ -1,31 +1,34 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TowerPlacer : MonoBehaviour
 {
+    MouseHover mouse;
+    public Dictionary<Tuple<int, int>, GameObject> towersOnMap;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (towersOnMap == null)
+        {
+            towersOnMap = new Dictionary<Tuple<int, int>, GameObject>();
+        }
 
+        mouse = gameObject.GetComponent<MouseHover>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    IEnumerator SpawnTest()
-    {
-        for (int x = 0; x < 10; x++)
+        if (Input.GetMouseButtonUp(0) && mouse.highlightedTile != null)
         {
-            for (int y = 0; y < 10; y++)
+            var mouseCoords = new Tuple<int, int>(mouse.mousePos.x, mouse.mousePos.y);
+            if (!towersOnMap.ContainsKey(mouseCoords))
             {
-                TowerFactory.Spawn(null, new Vector2Int(x,y));
-                yield return new WaitForSeconds(1f);
+                towersOnMap.Add(mouseCoords, TowerFactory.Spawn(new Vector2(mouse.mousePos.x + 0.5f, mouse.mousePos.y + 0.5f)));
             }
         }
-
     }
 }

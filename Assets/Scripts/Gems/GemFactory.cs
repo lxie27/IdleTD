@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class GemFactory : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class GemFactory : MonoBehaviour
     // All projectiles should be loaded in here
     static GemFactory()
     {
-        baseGem = Resources.Load("Projectiles/Base_Projectile", typeof(GameObject)) as GameObject;
+        baseGem = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Gems/BaseCommon", typeof(GameObject));
     }
 
     /// <summary>
@@ -19,7 +20,7 @@ public class GemFactory : MonoBehaviour
     /// <returns name="go">             - the attack damage gem             </returns>
     public static Gem CreateAttackDamageGem(float damageIncrease)
     {
-        AttackDamageGem gem = new AttackDamageGem(damageIncrease);
+        FlatDamageGem gem = new FlatDamageGem(damageIncrease);
         return gem;
     }
 

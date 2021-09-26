@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class TowerFactory
 {
@@ -9,16 +10,30 @@ public class TowerFactory
     // All projectiles should be loaded in here
     static TowerFactory()
     {
-        baseTower = Resources.Load("Towers/Base_Tower", typeof(GameObject)) as GameObject;
+        baseTower = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Base_Tower.prefab", typeof(GameObject));
+
+        if (baseTower == null)
+        {
+            Debug.Log("failed to load tower");
+        }
     }
 
     /// <summary>
     /// Creates a tower prefab at given
     /// </summary>
-    /// <param name="tower">    - prefab of the tower               </param>
     /// <param name="position"> - position of the targeted object   </param>
     /// <returns name="go">     - pointer to the spawned projectile </returns>
-    public static GameObject Spawn(GameObject tower, Vector2Int position)
+    public static GameObject Spawn(Vector2Int position)
+    {
+        return GameObject.Instantiate(baseTower, new Vector3(position.x, position.y, 0), Quaternion.identity);
+    }
+
+    /// <summary>
+    /// Creates a tower prefab at given
+    /// </summary>
+    /// <param name="position"> - position of the targeted object   </param>
+    /// <returns name="go">     - pointer to the spawned projectile </returns>
+    public static GameObject Spawn(Vector2 position)
     {
         return GameObject.Instantiate(baseTower, new Vector3(position.x, position.y, 0), Quaternion.identity);
     }

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEditor;
 public static class ProjectileFactory
 {
     static GameObject baseProjectile;
@@ -9,9 +9,8 @@ public static class ProjectileFactory
     // All projectiles should be loaded in here
     static ProjectileFactory()
     {
-        baseProjectile = Resources.Load("Projectiles/Base_Projectile", typeof(GameObject)) as GameObject;
+        baseProjectile = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Projectiles/Base_Projectile.prefab", typeof(GameObject));
     }
-
     // TODO just uses base projectile instead of getting a parameter to check tower type to determine projectile
     /// <summary>
     /// Creates a object proj at spawner's location that is given the target
