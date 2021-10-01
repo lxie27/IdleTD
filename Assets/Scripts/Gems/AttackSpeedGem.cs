@@ -11,12 +11,12 @@ public class AttackSpeedGem : Gem
         this.attackSpeedIncrease = attackSpeedIncrease;
     }
 
-    override public void ApplyModifiers(Tower tower)
+    override public void ApplyModifier(Tower tower)
     {
-        if (!isApplied)
+        if (!this.gemData.isApplied)
         {
             tower.attackSpeed *= attackSpeedIncrease;
-            isApplied = true;
+            this.gemData.isApplied = true;
         }
     }
 }

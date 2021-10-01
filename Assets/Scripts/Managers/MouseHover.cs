@@ -11,10 +11,13 @@ public class MouseHover : MonoBehaviour
     Grid grid;
     public Tilemap interactableTiles;
     public Tilemap towerTiles;
+
+    Color validColor = new Color(.06f, .89f, 1f, 1f);
+    Color invalidColor = new Color(.8f, 0f, 0f, 1f);
     Color originalColor = Color.white;
-    Color highlight = new Color(1f, .92f, .016f, 1f);
 
     public Tile highlightedTile;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,18 +29,31 @@ public class MouseHover : MonoBehaviour
     {
         // Mouse over -> highlight tile
         mousePos = GetMousePosition();
+
+        // Mouse is in the box of possible interactable cells
         if (interactableTiles.cellBounds.Contains((Vector3Int)mousePos))
         {
+            //  Mouse has been moved
             if (mousePos != previousPos)
             {
                 highlightedTile = interactableTiles.GetTile<Tile>((Vector3Int)mousePos);
 
-                if (highlightedTile != null)
+                //  Mouse is over a tile that is in interactableTiles
+                if (interactableTiles.ContainsTile(highlightedTile))
+                {
+                    if (highlightedTile != null)
+                    {
+                        SetTileColor(originalColor, previousPos, interactableTiles);
+                        SetTileColor(validColor, mousePos, interactableTiles);
+                    }
+                }
+                else
                 {
                     SetTileColor(originalColor, previousPos, interactableTiles);
-                    SetTileColor(highlight, mousePos, interactableTiles);
-                    previousPos = mousePos;
+                    highlightedTile = null;
                 }
+
+                previousPos = mousePos;
             }
         }
         else

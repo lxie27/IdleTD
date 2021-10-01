@@ -7822,6 +7822,49 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &284709824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 284709826}
+  - component: {fileID: 284709825}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &284709825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284709824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ee80df7620b7e4d8e8df4e9127a65a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &284709826
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284709824}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.21686, y: 7.014605, z: -10.776688}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &414497662
 GameObject:
   m_ObjectHideFlags: 0
@@ -14626,7 +14669,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 959bbdd9d9c45d244880ef394dcc1d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobs: []
+  mobs:
+  - {fileID: -2077390112760345286, guid: 23bd650f1059a06489fd8af3251e1c59, type: 3}
+  - {fileID: -2077390112760345286, guid: 23bd650f1059a06489fd8af3251e1c59, type: 3}
+  - {fileID: -2077390112760345286, guid: 23bd650f1059a06489fd8af3251e1c59, type: 3}
+  - {fileID: -2077390112760345286, guid: 23bd650f1059a06489fd8af3251e1c59, type: 3}
+  - {fileID: -2077390112760345286, guid: 23bd650f1059a06489fd8af3251e1c59, type: 3}
+  - {fileID: -2077390112760345286, guid: 23bd650f1059a06489fd8af3251e1c59, type: 3}
+  - {fileID: -2077390112760345286, guid: 23bd650f1059a06489fd8af3251e1c59, type: 3}
+  - {fileID: -2077390112760345286, guid: 23bd650f1059a06489fd8af3251e1c59, type: 3}
+  - {fileID: -2077390112760345286, guid: 23bd650f1059a06489fd8af3251e1c59, type: 3}
+  - {fileID: -2077390112760345286, guid: 23bd650f1059a06489fd8af3251e1c59, type: 3}
+  - {fileID: -2077390112760345286, guid: 23bd650f1059a06489fd8af3251e1c59, type: 3}
   spawnDelay: 1
 --- !u!4 &791567321
 Transform:

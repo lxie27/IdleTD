@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class GemFactory : MonoBehaviour
+public static class GemFactory
 {
     static GameObject baseGem;
 
@@ -30,6 +30,17 @@ public class GemFactory : MonoBehaviour
     /// <param name="speedIncrease">    - amount of attack speed the gem gives  </param>
     /// <returns name="go">             - the attack speed gem                  </returns>
     public static Gem CreateAttackSpeedGem(float speedIncrease)
+    {
+        AttackSpeedGem gem = new AttackSpeedGem(speedIncrease);
+        return gem;
+    }
+
+    /// <summary>
+    /// Creates an Attack Speed Gem at spawner's location that is given the target
+    /// </summary>
+    /// <param name="speedIncrease">    - amount of attack speed the gem gives  </param>
+    /// <returns name="go">             - the attack speed gem                  </returns>
+    public static Gem CreateGemFromData(float speedIncrease)
     {
         AttackSpeedGem gem = new AttackSpeedGem(speedIncrease);
         return gem;

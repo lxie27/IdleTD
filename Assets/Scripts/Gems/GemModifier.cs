@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum GemModifiers
+[System.Serializable]
+public enum GemModifier
 {
     None                    = 0,
 
@@ -27,7 +28,6 @@ public enum GemModifiers
     ArcingAttack            = 303,
 
     //Mythical modifiers    = 401-499
-
-
+    DuplicateTower          = 401,
 
 }

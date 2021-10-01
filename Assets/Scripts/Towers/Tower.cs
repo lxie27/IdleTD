@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
+    // Tower data
     public float damage;
     public float radius;
-    public float attackSpeed = 1f;
-    float currentCD = -5f;
+    public float attackSpeed;
+    List<Gem> gems;
 
+    float cdTimer = -1f;
     GameObject projectilePrefab;
     GameObject currentTarget;
-
     CircleCollider2D coll;
-
     Transform projectileSource;
 
-    List<Gem> gems;
+    List<GemData> gemsData;
+
+    public TowerData towerData;
 
     // Start is called before the first frame update
     void Start()
@@ -41,9 +43,9 @@ public class Tower : MonoBehaviour
 
     void AttackOnCooldown()
     {
-        if (Time.time > currentCD)
+        if (Time.time > cdTimer)
         {
-            currentCD = Time.time + attackSpeed;
+            cdTimer = Time.time + attackSpeed;
             ProjectileFactory.Spawn(projectilePrefab, projectileSource, currentTarget.transform);
         }
     }
@@ -52,25 +54,17 @@ public class Tower : MonoBehaviour
     {
         foreach (var gem in gems)
         {
-            gem.ApplyModifiers(this.gameObject.GetComponent<Tower>());
+            gem.ApplyModifier(this.gameObject.GetComponent<Tower>());
         }
     }
 
-    // TODO attacking preferences
-    private void OnTriggerEnter2D(Collider2D collision)
+    void ApplyTowerData(TowerData td)
     {
-        if (collision.tag == "Mob")
-        {
-            TargetSelection(collision);
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.tag == "Mob")
-        {
-            TargetSelection(collision);
-        }
+        this.damage = td.damage;
+        this.radius = td.radius;
+        this.attackSpeed = td.attackSpeed;
+        gems.Clear();
+        //Gem.Add(GemFactory.);
     }
 
     void TargetSelection(Collider2D collision)
@@ -89,11 +83,26 @@ public class Tower : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Mob")
+        {
+            TargetSelection(collision);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Mob")
+        {
+            TargetSelection(collision);
+        }
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         currentTarget = null;
     }
-
     public virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
