@@ -1,30 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    // Tower data
-    public float damage;
-    public float radius;
-    public float attackSpeed;
-    List<Gem> gems;
+    public TowerData towerData;
 
     float cdTimer = -1f;
-    GameObject projectilePrefab;
     GameObject currentTarget;
     CircleCollider2D coll;
     Transform projectileSource;
-
-    List<GemData> gemsData;
-
-    public TowerData towerData;
 
     // Start is called before the first frame update
     void Start()
     {
         coll = this.gameObject.GetComponent<CircleCollider2D>();
-        coll.radius = radius;
+        coll.radius = towerData.radius;
         projectileSource = this.gameObject.transform.Find("ProjectileSource") as Transform;
         if (projectileSource == null)
         {
@@ -45,28 +37,23 @@ public class Tower : MonoBehaviour
     {
         if (Time.time > cdTimer)
         {
-            cdTimer = Time.time + attackSpeed;
-            ProjectileFactory.Spawn(projectilePrefab, projectileSource, currentTarget.transform);
+            cdTimer = Time.time + towerData.attackSpeed;
+            ProjectileFactory.Spawn(projectileSource, currentTarget.transform);
         }
     }
 
-    void UpdateModifiers()
+    //TODO return based on subclass types
+    public virtual Texture2D GetPreviewTexture()
     {
-        foreach (var gem in gems)
+        switch (this.towerData.type)
         {
-            gem.ApplyModifier(this.gameObject.GetComponent<Tower>());
+            case TowerType.Basic:
+                return AssetPreview.GetAssetPreview(AssetDatabase.LoadAssetAtPath(
+                    "Assets/Prefabs/Towers/BaseTower", typeof(GameObject)));
+            default:
+                return null;
         }
     }
-
-    void ApplyTowerData(TowerData td)
-    {
-        this.damage = td.damage;
-        this.radius = td.radius;
-        this.attackSpeed = td.attackSpeed;
-        gems.Clear();
-        //Gem.Add(GemFactory.);
-    }
-
     void TargetSelection(Collider2D collision)
     {
         if (currentTarget == null)
@@ -75,8 +62,10 @@ public class Tower : MonoBehaviour
         }
         else
         {
-            if (Vector2.Distance(collision.transform.position, this.gameObject.transform.position) <
-                Vector2.Distance(currentTarget.transform.position, this.gameObject.transform.position))
+            if (Vector2.Distance(collision.transform.position, 
+                this.gameObject.transform.position) <
+                Vector2.Distance(currentTarget.transform.position, 
+                this.gameObject.transform.position))
             {
                 currentTarget = collision.gameObject;
             }
@@ -103,9 +92,5 @@ public class Tower : MonoBehaviour
     {
         currentTarget = null;
     }
-    public virtual void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, radius);
-    }
+    
 }

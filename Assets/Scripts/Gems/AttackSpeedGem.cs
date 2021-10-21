@@ -15,7 +15,7 @@ public class AttackSpeedGem : Gem
     {
         if (!this.gemData.isApplied)
         {
-            tower.attackSpeed *= attackSpeedIncrease;
+            tower.towerData.attackSpeed *= attackSpeedIncrease;
             this.gemData.isApplied = true;
         }
     }

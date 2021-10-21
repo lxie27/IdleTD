@@ -16,20 +16,16 @@ public class PlayerData
         currency = 0;
     }
 
-    public PlayerData CreateDevSaveData()
+    public static PlayerData CreateDevSaveData()
     {
         PlayerData save = new PlayerData();
 
         TowerData td1 = new TowerData();
-        TowerData td2 = new TowerData();
-        TowerData td3 = new TowerData();
-        TowerData td4 = new TowerData();
-        TowerData td5 = new TowerData();
+        td1.damage = 10f;
+        td1.attackSpeed = 5f;
+        td1.radius = 20f;
+
         save.towerInventory.Add(td1);
-        save.towerInventory.Add(td2);
-        save.towerInventory.Add(td3);
-        save.towerInventory.Add(td4);
-        save.towerInventory.Add(td5);
 
         GemData gem1 = new GemData();
         gem1.rarity = Rarity.Mythical;
@@ -51,7 +47,6 @@ public class PlayerData
         {
             save.gemInventory.Add(gem);
         }
-
         return save;
     }
 }

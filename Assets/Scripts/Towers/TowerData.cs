@@ -9,4 +9,5 @@ public class TowerData
     public float radius;
     public float attackSpeed;
     public List<GemData> gemsData;
+    public TowerType type;
 }

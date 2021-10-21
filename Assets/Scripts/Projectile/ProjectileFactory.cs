@@ -19,7 +19,7 @@ public static class ProjectileFactory
     /// <param name="proj">     - prefab of a projectile            </param>
     /// <param name="target">   - transform of the targeted object  </param>
     /// <returns name="go">     - pointer to the spawned projectile </returns>
-    public static GameObject Spawn(GameObject proj, Transform spawner, Transform target)
+    public static GameObject Spawn(Transform spawner, Transform target)
     {
         GameObject go = GameObject.Instantiate(baseProjectile, spawner);
         if (go.TryGetComponent<BaseProjectile>(out var bp))

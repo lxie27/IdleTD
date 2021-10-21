@@ -10,7 +10,7 @@ public class MobSpawner : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0);
         StartCoroutine(SpawnMobs(spawnDelay));
     }
 
@@ -23,9 +23,9 @@ public class MobSpawner : MonoBehaviour
     //Spawn then move
     IEnumerator SpawnMobs(float delay)
     {
-        foreach (var mob in mobs)
+        for (int i = 0; i < mobs.Count; i++)
         {
-            Instantiate(mob, this.transform.position, Quaternion.identity);
+            Instantiate(mobs[i], this.transform.position, Quaternion.identity);
             yield return new WaitForSeconds(delay);
         }
     }

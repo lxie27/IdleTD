@@ -15,7 +15,7 @@ public class PercentDamageGem : Gem
     {
         if (!this.gemData.isApplied)
         {
-            tower.damage *= attackIncrease;
+            tower.towerData.damage *= attackIncrease;
             this.gemData.isApplied = true;
         }
     }
