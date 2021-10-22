@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 // Interface for the enemy view
 public interface ITowerController
@@ -12,26 +13,25 @@ public interface ITowerController
 public class TowerController: MonoBehaviour
 {
     public TowerView view;
-
+    public List<Vector2> path;
     List<Mob> mobsInRange;
+
     float cdTimer = -1f;
 
     void Start()
     {
         mobsInRange = new List<Mob>();
+        path = GameObject.Find("Grid").GetComponent<GridMap>().pathCells;
     }
 
     void Update()
     {
-        foreach (var mob in mobsInRange)
-        {
-            Debug.Log(mob.name);
-        }
-
         if (mobsInRange.Count > 0)
         {
-            TargetSelection();
-            Debug.Log("Attacking target: " + view.currentTarget);
+            if (view.currentTarget == null)
+            {
+                TargetSelection();
+            }
             AttackOnCooldown();
         }
     }
@@ -39,7 +39,6 @@ public class TowerController: MonoBehaviour
     {
         if (collision.tag == "Mob")
         {
-            Debug.Log("Mob entered range.");
             mobsInRange.Add(collision.gameObject.GetComponent<Mob>());
         }
     }
@@ -48,7 +47,10 @@ public class TowerController: MonoBehaviour
     {
         if (collision.tag == "Mob")
         {
-            Debug.Log("Mob exited range.");
+            if (collision.gameObject.GetComponent<Mob>() == view.currentTarget)
+            {
+                view.currentTarget = null;
+            }
             mobsInRange.Remove(collision.gameObject.GetComponent<Mob>());
         }
     }
@@ -58,17 +60,27 @@ public class TowerController: MonoBehaviour
         if (Time.time > cdTimer)
         {
             cdTimer = Time.time + view.model.attackSpeed;
-            ProjectileFactory.Spawn(view.projectileSourceTransform, view.currentTarget.transform);
+
+            if (view.currentTarget != null)
+            {
+                ProjectileFactory.Spawn(view.projectileSourceTransform, view.currentTarget.transform);
+            }
         }
     }
 
     // Currently just attacks the oldest target in range, override for different target selection
     public virtual void TargetSelection()
     {
-        if (mobsInRange.Count > 0)
+        Mob farthestMob = mobsInRange[0];
+        //gets max index, this will be the "furthest" cell in the path
+        foreach (Mob mob in mobsInRange)
         {
-            view.currentTarget = mobsInRange[0];
+            if (mob.currentCell > farthestMob.currentCell)
+            {
+                farthestMob = mob;
+            }
         }
+        view.currentTarget = farthestMob;
     }
 }
 

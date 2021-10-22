@@ -11,11 +11,11 @@ public class PercentDamageGem : Gem
         this.attackIncrease = attackIncrease;
     }
 
-    override public void ApplyModifier(Tower tower)
+    override public void ApplyModifier(TowerModel tower)
     {
         if (!this.gemData.isApplied)
         {
-            tower.towerData.damage *= attackIncrease;
+            tower.damage *= attackIncrease;
             this.gemData.isApplied = true;
         }
     }

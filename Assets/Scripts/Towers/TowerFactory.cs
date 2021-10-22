@@ -10,7 +10,7 @@ public class TowerFactory
     // All projectiles should be loaded in here
     static TowerFactory()
     {
-        baseTower = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/BaseTower.prefab", typeof(GameObject));
+        baseTower = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Tower_Basic.prefab", typeof(GameObject));
 
         if (baseTower == null)
         {

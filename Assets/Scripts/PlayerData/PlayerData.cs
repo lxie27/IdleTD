@@ -5,13 +5,13 @@ using System.Collections.Generic;
 [System.Serializable]
 public class PlayerData
 {
-    public List<TowerData> towerInventory;
+    public List<TowerModel> towerInventory;
     public List<GemData> gemInventory;
     public float currency;
 
     public PlayerData()
     {
-        towerInventory = new List<TowerData>();
+        towerInventory = new List<TowerModel>();
         gemInventory = new List<GemData>();
         currency = 0;
     }
@@ -20,15 +20,17 @@ public class PlayerData
     {
         PlayerData save = new PlayerData();
 
-        TowerData td1 = new TowerData();
-        td1.damage = 10f;
-        td1.attackSpeed = 5f;
-        td1.radius = 20f;
-
-        save.towerInventory.Add(td1);
-
+        TowerModel t1 = TowerModel.Factory.CreateTowerModel();
         GemData gem1 = new GemData();
         gem1.rarity = Rarity.Mythical;
+        save.towerInventory.Add(t1);
+        t1.gemsData.Add(gem1);
+
+        TowerModel t2 = TowerModel.Factory.CreateTowerModel();
+        GemData gem2 = new GemData();
+        gem1.rarity = Rarity.Mythical;
+        save.towerInventory.Add(t2);
+        t1.gemsData.Add(gem1);
 
         save.currency += 999;
 
@@ -39,7 +41,7 @@ public class PlayerData
     {
         PlayerData save = new PlayerData();
 
-        foreach (TowerData tower in towerInventory)
+        foreach (TowerModel tower in towerInventory)
         {
             save.towerInventory.Add(tower);
         }

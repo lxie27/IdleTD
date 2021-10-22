@@ -10,7 +10,7 @@ public class TowerInventoryMenu : MonoBehaviour
     public float rightSpacing, bottomSpacing;
     public int rows, cols;
 
-    public List<TowerData> towersInInventory;
+    public List<TowerModel> towersInInventory;
     public TowerSlot slot;
     public GameObject slotsParent;
 
@@ -29,29 +29,7 @@ public class TowerInventoryMenu : MonoBehaviour
     {
         
     }
-    //SaveLoad.currentPlayer.towerInventory
-    public static List<Sprite> GetAllIconsFromData(List<TowerData> allTowerData)
-    {
-        List<Sprite> temp = new List<Sprite>();
-        foreach (var td in allTowerData)
-        {
-            temp.Add(GetTowerIconFromData(td));
-        }
-        return temp;
-    }
 
-    public static Sprite GetTowerIconFromData(TowerData td)
-    {
-        switch (td.type)
-        {
-            case TowerType.Basic:
-                Texture2D tempTexture = AssetPreview.GetAssetPreview(
-                    AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/BaseTower", typeof(GameObject)));
-                return Sprite.Create(tempTexture, new Rect(0, 0, tempTexture.width, tempTexture.height), Vector2.zero);
-            default:
-                return null;
-        }
-    }
     void SetSlots(int rows, int cols)
     {
         float slotHeight = slot.GetComponent<RectTransform>().rect.height;
@@ -75,11 +53,11 @@ public class TowerInventoryMenu : MonoBehaviour
 
     void PutTowersInSlots()
     {
-        //int i = 0;
-        Debug.Log(towersInInventory.Count + " towers in save file");
-        foreach (var tower in towersInInventory)
+        Debug.Log(towersInInventory.Count + " towers in save file"); 
+        for (int i = 0; i < towersInInventory.Count; i++)
         {
-            //slots[i].AddTowerToSlot(tower);
+            Debug.Log("Adding tower to inventory and displaying in slot: " + towersInInventory[i].type);
+            slots[i].AddTowerToSlot(towersInInventory[i]);
         }
     }
 }

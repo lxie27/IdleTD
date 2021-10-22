@@ -53,7 +53,7 @@ public class Gem : MonoBehaviour
         }
     }
 
-    virtual public void ApplyModifier(Tower tower)
+    virtual public void ApplyModifier(TowerModel tower)
     {
 
     }

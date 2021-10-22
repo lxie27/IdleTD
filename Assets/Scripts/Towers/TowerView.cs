@@ -16,7 +16,6 @@ public class TowerView: MonoBehaviour, ITowerView
     public TowerModel model;
     public CircleCollider2D coll;
     public Transform projectileSourceTransform;
-    Texture2D towerTexture;
     
     public Mob currentTarget;
 
@@ -24,7 +23,6 @@ public class TowerView: MonoBehaviour, ITowerView
     {
         SetTowerCollider();
         SetProjectileSource();
-        SetTexture();
 
         //debugging
         DEVSetModel();
@@ -48,11 +46,7 @@ public class TowerView: MonoBehaviour, ITowerView
             //Debug.Log("Didn't find projectile source");
         }
     }
-    //Override this in subclass towers to use their own specific textures
-    public virtual void SetTexture()
-    {
-        towerTexture = AssetPreview.GetAssetPreview(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/BaseTower", typeof(GameObject)));
-    }
+
     public virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.green;

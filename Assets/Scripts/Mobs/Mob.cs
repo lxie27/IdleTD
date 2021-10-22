@@ -12,7 +12,7 @@ public class Mob : MonoBehaviour
 
     public bool isMoving = false;
     public List<Vector2> path;
-    int currentCell;
+    public int currentCell; //index of current position in path cell list
     Vector2 nextPosition, endPosition;
 
     Direction currentDirection;

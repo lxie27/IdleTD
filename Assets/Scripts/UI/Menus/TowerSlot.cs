@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TowerSlot : MonoBehaviour
 {
-    public Tower tower;
+    public TowerModel towerData;
     public Sprite towerIcon;
 
     // Start is called before the first frame update
@@ -20,23 +20,20 @@ public class TowerSlot : MonoBehaviour
         
     }
 
-    public void AddTowerToSlot(Tower tower)
+    public void AddTowerToSlot(TowerModel _tower)
     {
-        this.tower = tower;
+        this.towerData = _tower;
         Display();
     }
 
     public void Display()
     {
-        if (tower != null)
+        if (towerData != null)
         {
-            Texture2D towerTexture = tower.GetPreviewTexture();
-            Sprite towerSprite = Sprite.Create(towerTexture, new Rect(0,0,towerTexture.width, towerTexture.height), new Vector2(0, 0));
-            gameObject.GetComponentInChildren<Image>().sprite = towerSprite;
-        }
-        else
-        {
-            gameObject.GetComponentInChildren<Image>().sprite = null;
+            GameObject tower = gameObject.transform.Find("Tower").gameObject;
+            tower.GetComponent<Image>().sprite =
+                Utils.GetIconFromTowerModel(towerData);
+            tower.GetComponent<Image>().color = Color.white;
         }
     }
 }
