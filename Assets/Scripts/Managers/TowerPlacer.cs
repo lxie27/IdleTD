@@ -4,14 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+public enum SelectionModes
+{
+    None = 0,
+    Select = 1,
+    PlaceTowers = 2
+}
+
 public class TowerPlacer : MonoBehaviour
 {
     MouseHover mouse;
     public Dictionary<Tuple<int, int>, GameObject> towersOnMap;
+    public SelectionModes currentMode;
 
     // Start is called before the first frame update
     void Start()
     {
+        currentMode = 0;
+
         if (towersOnMap == null)
         {
             towersOnMap = new Dictionary<Tuple<int, int>, GameObject>();
@@ -25,19 +35,48 @@ public class TowerPlacer : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
-            //do button stuff
+            //If we clicked on a game object
             if (EventSystem.current.IsPointerOverGameObject())
             {
-
+                //this check is kinda just for dodging an error
+                if (EventSystem.current.currentSelectedGameObject != null)
+                {
+                    if (EventSystem.current.currentSelectedGameObject.tag == "TowerSelectionButton")
+                    {
+                        currentMode = SelectionModes.PlaceTowers;
+                        Debug.Log("Selection mode: " + currentMode);
+                    }
+                }
             }
             //otherwise do gameobject stuff
-            else if (mouse.highlightedTile != null)
+            else
             {
-                var mouseCoords = new Tuple<int, int>(mouse.mousePos.x, mouse.mousePos.y);
-                if (!towersOnMap.ContainsKey(mouseCoords))
+                switch(currentMode)
                 {
-                    towersOnMap.Add(mouseCoords, TowerFactory.Spawn(new Vector2(mouse.mousePos.x + 0.5f, mouse.mousePos.y + 0.5f)));
+                    case SelectionModes.None:
+                        break;
+                    case SelectionModes.Select:
+                        break;
+                    case SelectionModes.PlaceTowers:
+                        PlaceTower();
+                        break;
+                    default:
+                        break;
                 }
+            }
+        }
+    }
+
+    void PlaceTower()
+    {
+        if (mouse.highlightedTile != null)
+        {
+            var mouseCoords = new Tuple<int, int>(mouse.mousePos.x, mouse.mousePos.y);
+            if (!towersOnMap.ContainsKey(mouseCoords))
+            {
+                towersOnMap.Add(mouseCoords, TowerFactory.Spawn(new Vector2(mouse.mousePos.x + 0.5f, mouse.mousePos.y + 0.5f)));
+                currentMode = SelectionModes.None; 
+                Debug.Log("Selection mode: " + currentMode);
             }
         }
     }

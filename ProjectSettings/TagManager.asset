@@ -9,6 +9,7 @@ TagManager:
   - Grid
   - Path
   - Projectile
+  - TowerSelectionButton
   layers:
   - Default
   - TransparentFX

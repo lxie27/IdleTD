@@ -53,10 +53,8 @@ public class TowerInventoryMenu : MonoBehaviour
 
     void PutTowersInSlots()
     {
-        Debug.Log(towersInInventory.Count + " towers in save file"); 
         for (int i = 0; i < towersInInventory.Count; i++)
         {
-            Debug.Log("Adding tower to inventory and displaying in slot: " + towersInInventory[i].type);
             slots[i].AddTowerToSlot(towersInInventory[i]);
         }
     }

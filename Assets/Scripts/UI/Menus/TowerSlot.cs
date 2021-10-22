@@ -7,6 +7,7 @@ public class TowerSlot : MonoBehaviour
 {
     public TowerModel towerData;
     public Sprite towerIcon;
+    public GameObject selectTowerButton;
 
     // Start is called before the first frame update
     void Start()
@@ -30,10 +31,12 @@ public class TowerSlot : MonoBehaviour
     {
         if (towerData != null)
         {
-            GameObject tower = gameObject.transform.Find("Tower").gameObject;
+            GameObject tower = gameObject.transform.Find("TowerIcon").gameObject;
             tower.GetComponent<Image>().sprite =
                 Utils.GetIconFromTowerModel(towerData);
             tower.GetComponent<Image>().color = Color.white;
         }
+
+        selectTowerButton.SetActive(true);
     }
 }
