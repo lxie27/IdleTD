@@ -223,7 +223,7 @@ MonoBehaviour:
   model:
     gemsData: []
     type: 0
-    damage: 1
+    damage: 2
     radius: 5
     attackSpeed: 1
   coll: {fileID: 1705970343360889}

@@ -16,7 +16,7 @@ public class TowerPlacer : MonoBehaviour
     MouseHover mouse;
     public Dictionary<Tuple<int, int>, GameObject> towersOnMap;
     public SelectionModes currentMode;
-
+    GameObject selectedObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +44,7 @@ public class TowerPlacer : MonoBehaviour
                     if (EventSystem.current.currentSelectedGameObject.tag == "TowerSelectionButton")
                     {
                         currentMode = SelectionModes.PlaceTowers;
-                        Debug.Log("Selection mode: " + currentMode);
+                        selectedObject = EventSystem.current.currentSelectedGameObject;
                     }
                 }
             }
@@ -58,7 +58,9 @@ public class TowerPlacer : MonoBehaviour
                     case SelectionModes.Select:
                         break;
                     case SelectionModes.PlaceTowers:
-                        PlaceTower();
+                        PlaceTower(selectedObject.
+                            GetComponent<SelectTowerButton>().towerSlot.
+                            GetComponent<TowerSlot>().towerModel);
                         break;
                     default:
                         break;
@@ -67,14 +69,14 @@ public class TowerPlacer : MonoBehaviour
         }
     }
 
-    void PlaceTower()
+    void PlaceTower(TowerModel _model)
     {
         if (mouse.highlightedTile != null)
         {
             var mouseCoords = new Tuple<int, int>(mouse.mousePos.x, mouse.mousePos.y);
             if (!towersOnMap.ContainsKey(mouseCoords))
             {
-                towersOnMap.Add(mouseCoords, TowerFactory.Spawn(new Vector2(mouse.mousePos.x + 0.5f, mouse.mousePos.y + 0.5f)));
+                towersOnMap.Add(mouseCoords, TowerFactory.Spawn(new Vector2(mouse.mousePos.x + 0.5f, mouse.mousePos.y + 0.5f), _model));
                 currentMode = SelectionModes.None; 
                 Debug.Log("Selection mode: " + currentMode);
             }

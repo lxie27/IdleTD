@@ -55,7 +55,7 @@ public class TowerView: MonoBehaviour, ITowerView
 
     void DEVSetModel()
     {
-        TowerModel _model = TowerModel.Factory.CreateTowerModel();
+        TowerModel _model = TowerModel.ModelFactory.CreateTowerModel();
         this.model = _model;
     }
 }

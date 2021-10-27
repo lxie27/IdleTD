@@ -16,7 +16,7 @@ public class SelectTowerButton : MonoBehaviour
 
     public TowerModel SelectTower()
     {
-        return this.gameObject.GetComponentInParent<TowerSlot>().towerData;
+        return this.gameObject.GetComponentInParent<TowerSlot>().towerModel;
     }
 
     // Update is called once per frame

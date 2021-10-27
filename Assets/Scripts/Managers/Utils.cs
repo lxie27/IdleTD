@@ -12,6 +12,8 @@ public static class Utils
         {
             case TowerType.Basic:
                 return AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Towers/BaseTower/BasicTowerHead.png");
+            case TowerType.Ranged:
+                return AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Towers/BaseTower/RangedTowerHead.png");
             default:
                 return null;
         }

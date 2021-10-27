@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TowerSlot : MonoBehaviour
 {
-    public TowerModel towerData;
+    public TowerModel towerModel;
     public Sprite towerIcon;
     public GameObject selectTowerButton;
 
@@ -23,17 +23,17 @@ public class TowerSlot : MonoBehaviour
 
     public void AddTowerToSlot(TowerModel _tower)
     {
-        this.towerData = _tower;
+        this.towerModel = _tower;
         Display();
     }
 
     public void Display()
     {
-        if (towerData != null)
+        if (towerModel != null)
         {
             GameObject tower = gameObject.transform.Find("TowerIcon").gameObject;
             tower.GetComponent<Image>().sprite =
-                Utils.GetIconFromTowerModel(towerData);
+                Utils.GetIconFromTowerModel(towerModel);
             tower.GetComponent<Image>().color = Color.white;
         }
 

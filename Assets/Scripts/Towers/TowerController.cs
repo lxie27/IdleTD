@@ -13,6 +13,7 @@ public interface ITowerController
 public class TowerController: MonoBehaviour
 {
     public TowerView view;
+    public TowerModel model;
     public List<Vector2> path;
     List<Mob> mobsInRange;
 
@@ -22,6 +23,7 @@ public class TowerController: MonoBehaviour
     {
         mobsInRange = new List<Mob>();
         path = GameObject.Find("Grid").GetComponent<GridMap>().pathCells;
+        model = view.model;
     }
 
     void Update()
@@ -59,7 +61,7 @@ public class TowerController: MonoBehaviour
     {
         if (Time.time > cdTimer)
         {
-            cdTimer = Time.time + view.model.attackSpeed;
+            cdTimer = Time.time + model.attackSpeed;
 
             if (view.currentTarget != null)
             {
