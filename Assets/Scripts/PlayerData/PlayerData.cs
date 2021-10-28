@@ -20,17 +20,20 @@ public class PlayerData
     {
         PlayerData save = new PlayerData();
 
-        TowerModel t1 = TowerModel.ModelFactory.CreateTowerModel(TowerType.Basic);
+        TowerModel SUPERSPEEDBASIC = TowerModel.ModelFactory.CreateTowerModel(TowerType.Basic);
         GemData gem1 = new GemData();
         gem1.rarity = Rarity.Mythical;
-        save.towerInventory.Add(t1);
-        t1.gemsData.Add(gem1);
+        SUPERSPEEDBASIC.attackSpeed += 20f;
+        SUPERSPEEDBASIC.damage = .01f;
+        save.towerInventory.Add(SUPERSPEEDBASIC);
+        SUPERSPEEDBASIC.gemsData.Add(gem1);
 
-        TowerModel t2 = TowerModel.ModelFactory.CreateTowerModel(TowerType.Basic);
+        TowerModel SUPERRANGEBASIC = TowerModel.ModelFactory.CreateTowerModel(TowerType.Basic);
         GemData gem2 = new GemData();
         gem1.rarity = Rarity.Mythical;
-        save.towerInventory.Add(t2);
-        t2.gemsData.Add(gem2);
+        SUPERSPEEDBASIC.radius = 10f;
+        save.towerInventory.Add(SUPERRANGEBASIC);
+        SUPERRANGEBASIC.gemsData.Add(gem2);
 
         TowerModel t3 = TowerModel.ModelFactory.CreateTowerModel(TowerType.Ranged);
         save.towerInventory.Add(t3);

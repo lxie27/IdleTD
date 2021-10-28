@@ -48,7 +48,7 @@ public class TowerPlacer : MonoBehaviour
                     }
                 }
             }
-            //otherwise do gameobject stuff
+
             else
             {
                 switch(currentMode)
@@ -78,7 +78,6 @@ public class TowerPlacer : MonoBehaviour
             {
                 towersOnMap.Add(mouseCoords, TowerFactory.Spawn(new Vector2(mouse.mousePos.x + 0.5f, mouse.mousePos.y + 0.5f), _model));
                 currentMode = SelectionModes.None; 
-                Debug.Log("Selection mode: " + currentMode);
             }
         }
     }

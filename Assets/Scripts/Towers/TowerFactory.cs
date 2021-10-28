@@ -10,8 +10,8 @@ public class TowerFactory
 
     static TowerFactory()
     {
-        baseTower = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Tower_Basic.prefab", typeof(GameObject));
-        rangedTower = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Tower_Ranged.prefab", typeof(GameObject));
+        baseTower       = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Tower_Basic.prefab", typeof(GameObject));
+        rangedTower     = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Tower_Ranged.prefab", typeof(GameObject));
     }
 
     /// <summary>

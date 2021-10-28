@@ -12,7 +12,7 @@ public class TowerInventoryMenu : MonoBehaviour
 
     public List<TowerModel> towersInInventory;
     public TowerSlot slot;
-    public GameObject slotsParent;
+    public GameObject slotsParent;              //used to nicely group towerslots
 
     List<TowerSlot> slots = new List<TowerSlot>();
 

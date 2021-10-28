@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using System.Linq;
 
 // Interface for the enemy view
 public interface ITowerController
@@ -28,32 +26,31 @@ public class TowerController: MonoBehaviour
 
     void Update()
     {
-        if (mobsInRange.Count > 0)
-        {
-            if (view.currentTarget == null)
-            {
-                TargetSelection();
-            }
-            AttackOnCooldown();
-        }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Mob")
-        {
-            mobsInRange.Add(collision.gameObject.GetComponent<Mob>());
-        }
+        UpdateMobsInRange();
+        PrintTargets();
+        TargetSelection();
+        AttackOnCooldown();
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    void PrintTargets()
     {
-        if (collision.tag == "Mob")
+        Debug.Log(mobsInRange.Count);
+    }
+
+    // Pretty expensive call, TODO optimize mob in individual tower ranges
+    void UpdateMobsInRange()
+    {
+        mobsInRange.Clear();
+        Collider2D[] allColliders = Physics2D.OverlapCircleAll((Vector2)this.transform.position, model.radius);
+
+        foreach (var coll in allColliders)
         {
-            if (collision.gameObject.GetComponent<Mob>() == view.currentTarget)
+            Debug.Log(coll.name);
+            if (coll.tag == "Mob")
             {
-                view.currentTarget = null;
+                mobsInRange.Add(coll.gameObject.GetComponent<Mob>());
             }
-            mobsInRange.Remove(collision.gameObject.GetComponent<Mob>());
+
         }
     }
 
@@ -73,6 +70,11 @@ public class TowerController: MonoBehaviour
     // Currently just attacks the oldest target in range, override for different target selection
     public virtual void TargetSelection()
     {
+        if (mobsInRange.Count < 1)
+        {
+            return;
+        }
+
         Mob farthestMob = mobsInRange[0];
         //gets max index, this will be the "furthest" cell in the path
         foreach (Mob mob in mobsInRange)
@@ -85,11 +87,4 @@ public class TowerController: MonoBehaviour
         view.currentTarget = farthestMob;
     }
 }
-
-
-public interface ITowerControllerFactory
-{
-    TowerController Controller { get; }
-}
-
 

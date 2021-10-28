@@ -19,11 +19,11 @@ public class TowerModel : ITowerModel
     private TowerModel()
     {
         //default values
-        damage = 1f;
-        radius = 5f;
-        attackSpeed = 1f;
-        type = TowerType.Basic;
-        gemsData = new List<GemData>();
+        damage              = 1f;
+        radius              = 5f;
+        attackSpeed         = 1f;
+        type                = TowerType.Basic;
+        gemsData            = new List<GemData>();
     }
 
     public void CopyModelData(TowerModel _model)

@@ -141,6 +141,7 @@ MonoBehaviour:
   speed: 3
   isMoving: 0
   path: []
+  currentCell: 0
 --- !u!95 &4726367185700662732
 Animator:
   serializedVersion: 3
