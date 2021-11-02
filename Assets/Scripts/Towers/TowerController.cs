@@ -27,14 +27,8 @@ public class TowerController: MonoBehaviour
     void Update()
     {
         UpdateMobsInRange();
-        PrintTargets();
         TargetSelection();
         AttackOnCooldown();
-    }
-
-    void PrintTargets()
-    {
-        Debug.Log(mobsInRange.Count);
     }
 
     // Pretty expensive call, TODO optimize mob in individual tower ranges
@@ -45,7 +39,6 @@ public class TowerController: MonoBehaviour
 
         foreach (var coll in allColliders)
         {
-            Debug.Log(coll.name);
             if (coll.tag == "Mob")
             {
                 mobsInRange.Add(coll.gameObject.GetComponent<Mob>());
@@ -72,6 +65,7 @@ public class TowerController: MonoBehaviour
     {
         if (mobsInRange.Count < 1)
         {
+            view.currentTarget = null;
             return;
         }
 
