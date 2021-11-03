@@ -9,6 +9,7 @@ public interface ITowerModel
 [System.Serializable]
 public class TowerModel : ITowerModel
 {
+    public string name;
     public List<GemData> gemsData;
     public TowerType type;
 
@@ -23,11 +24,13 @@ public class TowerModel : ITowerModel
         radius              = 5f;
         attackSpeed         = 1f;
         type                = TowerType.Basic;
+        name                = type + "";
         gemsData            = new List<GemData>();
     }
 
     public void CopyModelData(TowerModel _model)
     {
+        this.name           = _model.name;
         this.damage         = _model.damage;
         this.radius         = _model.radius;
         this.attackSpeed    = _model.attackSpeed;
@@ -37,20 +40,22 @@ public class TowerModel : ITowerModel
 
     public static void SetBasicTowerDefaults(TowerModel _model)
     {
-        _model.damage = 2f;
-        _model.radius = 5f;
-        _model.attackSpeed = 1f;
-        _model.type = TowerType.Basic;
-        _model.gemsData = new List<GemData>();
+        _model.damage           = 2f;
+        _model.radius           = 5f;
+        _model.attackSpeed      = 1f;
+        _model.type             = TowerType.Basic;
+        _model.name             = TowerType.Basic + "";
+        _model.gemsData         = new List<GemData>();
     }
 
     public static void SetRangedTowerDefaults(TowerModel _model)
     {
-        _model.damage = 2f;
-        _model.radius = 10f;
-        _model.attackSpeed = .5f;
-        _model.type = TowerType.Ranged;
-        _model.gemsData = new List<GemData>();
+        _model.damage           = 2f;
+        _model.radius           = 10f;
+        _model.attackSpeed      = .5f;
+        _model.type             = TowerType.Ranged;
+        _model.name             = TowerType.Ranged + "";
+        _model.gemsData         = new List<GemData>();
     }
 
     public class ModelFactory

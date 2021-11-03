@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public enum SelectionModes
 {
@@ -13,9 +14,12 @@ public enum SelectionModes
 
 public class TowerPlacer : MonoBehaviour
 {
+    public GameObject towerDisplay;
+
     MouseHover mouse;
     public Dictionary<Tuple<int, int>, GameObject> towersOnMap;
     public SelectionModes currentMode;
+
     GameObject selectedObject;
     // Start is called before the first frame update
     void Start()
@@ -43,8 +47,9 @@ public class TowerPlacer : MonoBehaviour
                 {
                     if (EventSystem.current.currentSelectedGameObject.tag == "TowerSelectionButton")
                     {
-                        currentMode = SelectionModes.PlaceTowers;
                         selectedObject = EventSystem.current.currentSelectedGameObject;
+                        currentMode = SelectionModes.PlaceTowers;
+                        DisplayTowerPreview();
                     }
                 }
             }
@@ -65,6 +70,34 @@ public class TowerPlacer : MonoBehaviour
                     default:
                         break;
                 }
+            }
+        }
+    }
+
+    void DisplayTowerPreview()
+    {
+        UndisplayTowerPreview();
+
+        GameObject towerPreview = selectedObject.
+            GetComponent<SelectTowerButton>().towerSlot.
+            GetComponent<TowerSlot>().GenerateTowerPreview();
+
+
+        Utils.SetLayerRecursively(towerPreview, 5); //layer 5 is UI
+        towerPreview.transform.parent = towerDisplay.transform;
+        towerPreview.transform.localPosition = new Vector2(0, -30f);
+        towerPreview.transform.localScale = new Vector2(75, 75);
+        
+        //also show text with stats of tower
+    }
+
+    void UndisplayTowerPreview()
+    {
+        if (towerDisplay.transform.childCount > 0)
+        {
+            foreach (Transform child in towerDisplay.transform)
+            {
+                Destroy(child.gameObject);
             }
         }
     }

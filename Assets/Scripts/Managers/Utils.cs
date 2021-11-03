@@ -18,4 +18,13 @@ public static class Utils
                 return null;
         }
     }
+    
+    //Sets gameobject and all its children's layers to layerNumber
+    public static void SetLayerRecursively(GameObject go, int layerNumber)
+    {
+        foreach (Transform trans in go.GetComponentsInChildren<Transform>(true))
+        {
+            trans.gameObject.layer = layerNumber;
+        }
+    }
 }
