@@ -20,25 +20,28 @@ public class PlayerData
     {
         PlayerData save = new PlayerData();
 
-        TowerModel SUPERSPEEDBASIC = TowerModel.ModelFactory.CreateTowerModel(TowerType.Basic);
+        TowerModel t1 = TowerModel.ModelFactory.CreateTowerModel(TowerType.Basic);
         GemData gem1 = new GemData();
         gem1.rarity = Rarity.Mythical;
-        SUPERSPEEDBASIC.attackSpeed += 20f;
-        SUPERSPEEDBASIC.damage = .01f;
-        save.towerInventory.Add(SUPERSPEEDBASIC);
-        SUPERSPEEDBASIC.gemsData.Add(gem1);
+        t1.name = "Super Speed Basic Tower";
+        t1.attackSpeed += 20f;
+        t1.damage = .01f;
+        save.towerInventory.Add(t1);
+        t1.gemsData.Add(gem1);
 
-        TowerModel t3 = TowerModel.ModelFactory.CreateTowerModel(TowerType.Ranged);
-        t3.attackSpeed = 1f;
-        t3.damage = 1f;
-        save.towerInventory.Add(t3);
+        TowerModel t2 = TowerModel.ModelFactory.CreateTowerModel(TowerType.Ranged);
+        t2.name = "Normal Range Tower";
+        t2.attackSpeed = 1f;
+        t2.damage = 1f;
+        save.towerInventory.Add(t2);
 
-        TowerModel SUPERRANGEBASIC = TowerModel.ModelFactory.CreateTowerModel(TowerType.Basic);
+        TowerModel t3 = TowerModel.ModelFactory.CreateTowerModel(TowerType.Basic);
         GemData gem2 = new GemData();
+        t3.name = "Super Range Basic Tower";
         gem1.rarity = Rarity.Mythical;
-        SUPERSPEEDBASIC.radius = 10f;
-        save.towerInventory.Add(SUPERRANGEBASIC);
-        SUPERRANGEBASIC.gemsData.Add(gem2);
+        t3.radius = 10f;
+        save.towerInventory.Add(t3);
+        t3.gemsData.Add(gem2);
 
         save.currency += 999;
 

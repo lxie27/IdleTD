@@ -14,7 +14,8 @@ public enum SelectionModes
 
 public class TowerPlacer : MonoBehaviour
 {
-    public GameObject towerDisplay;
+    public GameObject   towerDisplay;
+    public Text         towerSummary;
 
     MouseHover mouse;
     public Dictionary<Tuple<int, int>, GameObject> towersOnMap;
@@ -78,17 +79,24 @@ public class TowerPlacer : MonoBehaviour
     {
         UndisplayTowerPreview();
 
-        GameObject towerPreview = selectedObject.
+        TowerSlot selectedTowerSlot = selectedObject.
             GetComponent<SelectTowerButton>().towerSlot.
-            GetComponent<TowerSlot>().GenerateTowerPreview();
+            GetComponent<TowerSlot>();
+        GameObject towerPreview = selectedTowerSlot.GenerateTowerPreview();
+        TowerModel towerModel = selectedTowerSlot.towerModel;
 
-
+        //Tower image preview
         Utils.SetLayerRecursively(towerPreview, 5); //layer 5 is UI
         towerPreview.transform.parent = towerDisplay.transform;
         towerPreview.transform.localPosition = new Vector2(0, -30f);
         towerPreview.transform.localScale = new Vector2(75, 75);
-        
-        //also show text with stats of tower
+
+        // Tower summary in text
+        towerSummary.text += towerModel.name + "\n";
+        towerSummary.text += "Damage: " + towerModel.damage.ToString() + "\n";
+        towerSummary.text += "Radius: " + towerModel.radius.ToString() + "\n";
+        towerSummary.text += "Attack Speed: " + towerModel.attackSpeed.ToString() + "\n";
+        towerSummary.text += "Type: " + towerModel.type + "\n";
     }
 
     void UndisplayTowerPreview()
@@ -100,6 +108,8 @@ public class TowerPlacer : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }
+
+        towerSummary.text = "";
     }
 
     void PlaceTower(TowerModel _model)
