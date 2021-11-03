@@ -92,6 +92,7 @@ public class TowerPlacer : MonoBehaviour
         towerPreview.transform.localScale = new Vector2(75, 75);
 
         // Tower summary in text
+        towerSummary.text += "\n";
         towerSummary.text += towerModel.name + "\n";
         towerSummary.text += "Damage: " + towerModel.damage.ToString() + "\n";
         towerSummary.text += "Radius: " + towerModel.radius.ToString() + "\n";

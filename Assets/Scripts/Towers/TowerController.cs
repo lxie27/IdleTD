@@ -45,6 +45,14 @@ public class TowerController: MonoBehaviour
             }
 
         }
+
+        Debug.Log(mobsInRange.Count + " radius: " + model.radius);
+    }
+
+    public void UpdateModel(TowerModel _model)
+    {
+        model = _model;
+        view.UpdateModel(model);
     }
 
     void AttackOnCooldown()

@@ -29,7 +29,7 @@ public class TowerFactory
         switch (_model.type)
         {
             case TowerType.Basic:
-                tower =  GameObject.Instantiate(baseTower, new Vector3(position.x, position.y, 0), Quaternion.identity);
+                tower = GameObject.Instantiate(baseTower, new Vector3(position.x, position.y, 0), Quaternion.identity);
                 break;
             case TowerType.Ranged:
                 tower = GameObject.Instantiate(rangedTower, new Vector3(position.x, position.y, 0), Quaternion.identity);
@@ -39,7 +39,7 @@ public class TowerFactory
                 break;
         }
 
-        tower.GetComponent<TowerView>().model = _model;
+        tower.GetComponent<TowerController>().UpdateModel(_model);
 
         return tower;
     }

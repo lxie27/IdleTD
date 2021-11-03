@@ -21,16 +21,18 @@ public class TowerView: MonoBehaviour, ITowerView
 
     void Start()
     {
-        SetTowerCollider();
-        SetProjectileSource();
-
-        //debugging
-        DEVSetModel();
+        UpdateComponents();
     }
 
     void Update()
     {
         
+    }
+
+    void UpdateComponents()
+    {
+        SetTowerCollider();
+        SetProjectileSource();
     }
 
     void SetTowerCollider()
@@ -50,13 +52,11 @@ public class TowerView: MonoBehaviour, ITowerView
     public virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, coll.radius);
+        Gizmos.DrawWireSphere(transform.position, model.radius);
     }
-
-    void DEVSetModel()
+    public void UpdateModel(TowerModel _model)
     {
-        TowerModel _model = TowerModel.ModelFactory.CreateTowerModel();
-        this.model = _model;
+        model = _model;
     }
 }
 

@@ -31,8 +31,6 @@ public class PlayerData
 
         TowerModel t2 = TowerModel.ModelFactory.CreateTowerModel(TowerType.Ranged);
         t2.name = "Normal Range Tower";
-        t2.attackSpeed = 1f;
-        t2.damage = 1f;
         save.towerInventory.Add(t2);
 
         TowerModel t3 = TowerModel.ModelFactory.CreateTowerModel(TowerType.Basic);
