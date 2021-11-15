@@ -15,7 +15,8 @@ public class TowerModel : ITowerModel
 
     public float damage;
     public float radius;
-    public float attackSpeed;
+    //1f is 1 second, for faster attack speed decrease this value
+    public float attackSpeed;   
 
     private TowerModel()
     {
@@ -30,32 +31,32 @@ public class TowerModel : ITowerModel
 
     public void CopyModelData(TowerModel _model)
     {
-        this.name           = _model.name;
         this.damage         = _model.damage;
         this.radius         = _model.radius;
         this.attackSpeed    = _model.attackSpeed;
         this.type           = _model.type;
+        this.name           = _model.name;
         this.gemsData       = _model.gemsData;
     }
 
     public static void SetBasicTowerDefaults(TowerModel _model)
     {
-        _model.damage           = 2f;
-        _model.radius           = 5f;
-        _model.attackSpeed      = 1f;
-        _model.type             = TowerType.Basic;
-        _model.name             = TowerType.Basic + "";
-        _model.gemsData         = new List<GemData>();
+        _model.damage       = 2f;
+        _model.radius       = 5f;
+        _model.attackSpeed  = 1f;
+        _model.type         = TowerType.Basic;
+        _model.name         = TowerType.Basic + "";
+        _model.gemsData     = new List<GemData>();
     }
 
     public static void SetRangedTowerDefaults(TowerModel _model)
     {
-        _model.damage           = 2f;
-        _model.radius           = 10f;
-        _model.attackSpeed      = .5f;
-        _model.type             = TowerType.Ranged;
-        _model.name             = TowerType.Ranged + "";
-        _model.gemsData         = new List<GemData>();
+        _model.damage       = 2f;
+        _model.radius       = 10f;
+        _model.attackSpeed  = 1.5f;
+        _model.type         = TowerType.Ranged;
+        _model.name         = TowerType.Ranged + "";
+        _model.gemsData     = new List<GemData>();
     }
 
     public class ModelFactory

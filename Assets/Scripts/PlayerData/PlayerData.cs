@@ -24,8 +24,8 @@ public class PlayerData
         GemData gem1 = new GemData();
         gem1.rarity = Rarity.Mythical;
         t1.name = "Super Speed Basic Tower";
-        t1.attackSpeed += 20f;
-        t1.damage = .01f;
+        t1.attackSpeed /= 10f;
+        t1.damage = .05f;
         save.towerInventory.Add(t1);
         t1.gemsData.Add(gem1);
 

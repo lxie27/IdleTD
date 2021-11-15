@@ -15,7 +15,7 @@ public class TowerController: MonoBehaviour
     public List<Vector2> path;
     List<Mob> mobsInRange;
 
-    float cdTimer = -1f;
+    float cdTimer = 0f;
 
     void Start()
     {
@@ -30,6 +30,20 @@ public class TowerController: MonoBehaviour
         TargetSelection();
         AttackOnCooldown();
     }
+    public void UpdateModel(TowerModel _model)
+    {
+        model = _model;
+        view.UpdateModel(model);
+    }
+
+    void AttackOnCooldown()
+    {
+        if (Time.time > cdTimer && view.currentTarget != null)
+        {
+            ProjectileFactory.Spawn(view.projectileSourceTransform, view.currentTarget.transform);
+            cdTimer = Time.time + model.attackSpeed;
+        }
+    }
 
     // Pretty expensive call, TODO optimize mob in individual tower ranges
     void UpdateMobsInRange()
@@ -43,28 +57,6 @@ public class TowerController: MonoBehaviour
             {
                 mobsInRange.Add(coll.gameObject.GetComponent<Mob>());
             }
-
-        }
-
-        Debug.Log(mobsInRange.Count + " radius: " + model.radius);
-    }
-
-    public void UpdateModel(TowerModel _model)
-    {
-        model = _model;
-        view.UpdateModel(model);
-    }
-
-    void AttackOnCooldown()
-    {
-        if (Time.time > cdTimer)
-        {
-            cdTimer = Time.time + model.attackSpeed;
-
-            if (view.currentTarget != null)
-            {
-                ProjectileFactory.Spawn(view.projectileSourceTransform, view.currentTarget.transform);
-            }
         }
     }
 
@@ -76,9 +68,15 @@ public class TowerController: MonoBehaviour
             view.currentTarget = null;
             return;
         }
+        else if (mobsInRange.Count == 1)
+        {
+            view.currentTarget = mobsInRange[0];
+            return;
+        }
 
         Mob farthestMob = mobsInRange[0];
-        //gets max index, this will be the "furthest" cell in the path
+
+        //gets max index, this will be the mob with the "furthest" cell in the path
         foreach (Mob mob in mobsInRange)
         {
             if (mob.currentCell > farthestMob.currentCell)
@@ -86,6 +84,7 @@ public class TowerController: MonoBehaviour
                 farthestMob = mob;
             }
         }
+
         view.currentTarget = farthestMob;
     }
 }

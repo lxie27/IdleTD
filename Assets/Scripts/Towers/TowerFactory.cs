@@ -11,8 +11,8 @@ public class TowerFactory
 
     static TowerFactory()
     {
-        baseTower       = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Tower_Basic.prefab", typeof(GameObject));
-        rangedTower     = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Tower_Ranged.prefab", typeof(GameObject));
+        baseTower   = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Tower_Basic.prefab", typeof(GameObject));
+        rangedTower = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Tower_Ranged.prefab", typeof(GameObject));
     }
 
     /// <summary>
@@ -38,7 +38,6 @@ public class TowerFactory
                 tower = GameObject.Instantiate(baseTower, new Vector3(position.x, position.y, 0), Quaternion.identity);
                 break;
         }
-
         tower.GetComponent<TowerController>().UpdateModel(_model);
 
         return tower;
