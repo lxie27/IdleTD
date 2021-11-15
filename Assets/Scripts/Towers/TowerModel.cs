@@ -9,6 +9,7 @@ public interface ITowerModel
 [System.Serializable]
 public class TowerModel : ITowerModel
 {
+    const float STARBONUS = .1f; // each star adds 10% to damage/AS
     public string name;
     public List<GemData> gemsData;
     public TowerType type;
@@ -16,8 +17,8 @@ public class TowerModel : ITowerModel
     public float damage;
     public float radius;
     //1f is 1 second, for faster attack speed decrease this value
-    public float attackSpeed;   
-
+    public float attackSpeed;
+    public int stars;
     private TowerModel()
     {
         //default values
@@ -27,6 +28,7 @@ public class TowerModel : ITowerModel
         type                = TowerType.Basic;
         name                = type + "";
         gemsData            = new List<GemData>();
+        stars               = 0;
     }
 
     public void CopyModelData(TowerModel _model)
@@ -37,6 +39,7 @@ public class TowerModel : ITowerModel
         this.type           = _model.type;
         this.name           = _model.name;
         this.gemsData       = _model.gemsData;
+        this.stars          = _model.stars;
     }
 
     public static void SetBasicTowerDefaults(TowerModel _model)
@@ -47,6 +50,7 @@ public class TowerModel : ITowerModel
         _model.type         = TowerType.Basic;
         _model.name         = TowerType.Basic + "";
         _model.gemsData     = new List<GemData>();
+        _model.stars        = 0;
     }
 
     public static void SetRangedTowerDefaults(TowerModel _model)
@@ -57,6 +61,7 @@ public class TowerModel : ITowerModel
         _model.type         = TowerType.Ranged;
         _model.name         = TowerType.Ranged + "";
         _model.gemsData     = new List<GemData>();
+        _model.stars        = 0;
     }
 
     public class ModelFactory
@@ -66,7 +71,7 @@ public class TowerModel : ITowerModel
             return new TowerModel();
         }
 
-        public static TowerModel CreateTowerModel(TowerType type)
+        public static TowerModel CreateTowerModelFromType(TowerType type)
         {
             TowerModel model = new TowerModel();
             switch (type)
@@ -84,6 +89,11 @@ public class TowerModel : ITowerModel
             }
 
             return model;
+        }
+        public static void ApplyStarBonus(TowerModel _model)
+        {
+            _model.damage += _model.damage * (_model.stars * STARBONUS);
+            _model.attackSpeed *= (_model.stars * STARBONUS);
         }
     }
 }

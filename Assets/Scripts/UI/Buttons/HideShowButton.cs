@@ -22,7 +22,7 @@ public class HideShowButton : MonoBehaviour
 			hideShowButton.GetComponentInChildren<Text>().text = "Show Buttons";
 		}
 	}
-
+	
 	void TaskOnClick()
 	{
 		if (hidableButtons.activeSelf)

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TowerInventoryMenu : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class TowerInventoryMenu : MonoBehaviour
     public List<TowerModel> towersInInventory;
     public TowerSlot slot;
     public GameObject slotsParent;              //used to nicely group towerslots
+
+    public GameObject towerPreviewDisplay;
+    public Text towerPreviewSummary;
+    public List<GameObject> stars;
 
     List<TowerSlot> slots = new List<TowerSlot>();
 
@@ -56,6 +61,56 @@ public class TowerInventoryMenu : MonoBehaviour
         for (int i = 0; i < towersInInventory.Count; i++)
         {
             slots[i].AddTowerToSlot(towersInInventory[i]);
+        }
+    }
+    public void DisplayTowerPreview(TowerSlot selectedTowerSlot)
+    {
+        UndisplayTowerPreview();
+
+        GameObject towerPreview = selectedTowerSlot.GenerateTowerPreview();
+        TowerModel towerModel = selectedTowerSlot.towerModel;
+
+        //Tower image preview
+        Utils.SetLayerRecursively(towerPreview, 5); //layer 5 is UI
+        towerPreview.transform.parent = towerPreviewDisplay.transform;
+        towerPreview.transform.localPosition = new Vector2(0, -30f);
+        towerPreview.transform.localScale = new Vector2(75, 75);
+
+        // Tower summary in text
+        towerPreviewSummary.text += "\n";
+        towerPreviewSummary.text += towerModel.name + "\n";
+        towerPreviewSummary.text += "Damage: " + towerModel.damage.ToString("F2") + "\n";
+        towerPreviewSummary.text += "Radius: " + towerModel.radius.ToString("F2") + "\n";
+        towerPreviewSummary.text += "Attack Speed: " + towerModel.attackSpeed.ToString("F2") + "\n";
+        towerPreviewSummary.text += "Type: " + towerModel.type + "\n";
+        
+        foreach (GameObject star in stars)
+        {
+            star.SetActive(true);
+        }
+
+        for (int s = 0; s < towerModel.stars; s++)
+        {
+            stars[s].GetComponent<Image>().color = Color.white;
+        }
+    }
+
+    public void UndisplayTowerPreview()
+    {
+        if (towerPreviewDisplay.transform.childCount > 0)
+        {
+            foreach (Transform child in towerPreviewDisplay.transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
+        towerPreviewSummary.text = "";
+
+        foreach(GameObject star in stars)
+        {
+            star.SetActive(false);
+            star.GetComponent<Image>().color = Color.black;
         }
     }
 }

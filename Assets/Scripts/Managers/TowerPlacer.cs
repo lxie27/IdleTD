@@ -14,14 +14,13 @@ public enum SelectionModes
 
 public class TowerPlacer : MonoBehaviour
 {
-    public GameObject   towerDisplay;
-    public Text         towerSummary;
-
-    MouseHover mouse;
+    public TowerInventoryMenu towerInventoryMenu;
     public Dictionary<Tuple<int, int>, GameObject> towersOnMap;
     public SelectionModes currentMode;
 
+    MouseHover mouse;
     GameObject selectedObject;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +49,10 @@ public class TowerPlacer : MonoBehaviour
                     {
                         selectedObject = EventSystem.current.currentSelectedGameObject;
                         currentMode = SelectionModes.PlaceTowers;
-                        DisplayTowerPreview();
+                        towerInventoryMenu.DisplayTowerPreview(
+                            selectedObject.
+                            GetComponent<SelectTowerButton>().towerSlot.
+                            GetComponent<TowerSlot>());
                     }
                 }
             }
@@ -75,7 +77,7 @@ public class TowerPlacer : MonoBehaviour
         }
     }
 
-    void DisplayTowerPreview()
+    /*void DisplayTowerPreview()
     {
         UndisplayTowerPreview();
 
@@ -111,7 +113,7 @@ public class TowerPlacer : MonoBehaviour
         }
 
         towerSummary.text = "";
-    }
+    }*/
 
     void PlaceTower(TowerModel _model)
     {

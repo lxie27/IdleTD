@@ -20,26 +20,22 @@ public class PlayerData
     {
         PlayerData save = new PlayerData();
 
-        TowerModel t1 = TowerModel.ModelFactory.CreateTowerModel(TowerType.Basic);
-        GemData gem1 = new GemData();
-        gem1.rarity = Rarity.Mythical;
-        t1.name = "Super Speed Basic Tower";
-        t1.attackSpeed /= 10f;
-        t1.damage = .05f;
+        TowerModel t1 = TowerModel.ModelFactory.CreateTowerModelFromType(TowerType.Basic);
+        t1.name = "Basic tower 1";
+        t1.stars = 5;
+        TowerModel.ModelFactory.ApplyStarBonus(t1);
+
+        TowerModel t2 = TowerModel.ModelFactory.CreateTowerModelFromType(TowerType.Basic);
+        t2.name = "Basic tower 2";
+        t2.stars = 2;
+        TowerModel.ModelFactory.ApplyStarBonus(t2);
+
+        TowerModel t3 = TowerModel.ModelFactory.CreateTowerModelFromType(TowerType.Ranged);
+        t3.name = "Normal Range Tower";
+
         save.towerInventory.Add(t1);
-        t1.gemsData.Add(gem1);
-
-        TowerModel t2 = TowerModel.ModelFactory.CreateTowerModel(TowerType.Ranged);
-        t2.name = "Normal Range Tower";
         save.towerInventory.Add(t2);
-
-        TowerModel t3 = TowerModel.ModelFactory.CreateTowerModel(TowerType.Basic);
-        GemData gem2 = new GemData();
-        t3.name = "Super Range Basic Tower";
-        gem1.rarity = Rarity.Mythical;
-        t3.radius = 10f;
         save.towerInventory.Add(t3);
-        t3.gemsData.Add(gem2);
 
         save.currency += 999;
 
