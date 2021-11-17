@@ -9,7 +9,7 @@ public static class ProjectileFactory
     // All projectiles should be loaded in here
     static ProjectileFactory()
     {
-        baseProjectile = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Projectiles/Base_Projectile.prefab", typeof(GameObject));
+        baseProjectile = Resources.Load<GameObject>("Prefabs/Projectiles/Base_Projectile");
     }
     // TODO just uses base projectile instead of getting a parameter to check tower type to determine projectile
     /// <summary>

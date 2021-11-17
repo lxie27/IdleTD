@@ -31,6 +31,13 @@ public class TowerModel : ITowerModel
         stars               = 0;
     }
 
+    // Tower's responsibility to call to apply modifier
+    public void AddGem(GemData gemData)
+    {
+        this.gemsData.Add(gemData);
+        gemData.ApplyModifiers(this);
+    }
+
     public void CopyModelData(TowerModel _model)
     {
         this.damage         = _model.damage;
@@ -93,7 +100,7 @@ public class TowerModel : ITowerModel
         public static void ApplyStarBonus(TowerModel _model)
         {
             _model.damage += _model.damage * (_model.stars * STARBONUS);
-            _model.attackSpeed *= (_model.stars * STARBONUS);
+            _model.attackSpeed = _model.attackSpeed * (_model.stars * STARBONUS);
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [System.Serializable]
-public enum GemModifier
+public enum GemModifierTypes
 {
     None                    = 0,
 
@@ -17,7 +17,6 @@ public enum GemModifier
     AreaOfEffectDamage      = 101,
     ProjectileCountIncrease = 102,
 
-
     //Epic modifiers        = 201-299
     VulnerableProjectiles   = 201,
     SlowingProjectiles      = 202,
@@ -29,5 +28,4 @@ public enum GemModifier
 
     //Mythical modifiers    = 401-499
     DuplicateTower          = 401,
-
 }

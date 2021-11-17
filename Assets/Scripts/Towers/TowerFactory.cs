@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.UI;
 
 public class TowerFactory
@@ -11,8 +10,8 @@ public class TowerFactory
 
     static TowerFactory()
     {
-        baseTower   = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Tower_Basic.prefab", typeof(GameObject));
-        rangedTower = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Tower_Ranged.prefab", typeof(GameObject));
+        baseTower   = Resources.Load<GameObject>("Prefabs/Towers/Tower_Basic");
+        rangedTower = Resources.Load<GameObject>("Prefabs/Towers/Tower_Ranged");
     }
 
     /// <summary>
@@ -39,6 +38,7 @@ public class TowerFactory
                 break;
         }
         tower.GetComponent<TowerController>().UpdateModel(_model);
+        tower.GetComponent<TowerView>().SetDisplayedGemToRarest();
 
         return tower;
     }

@@ -19,6 +19,8 @@ public class TowerView: MonoBehaviour, ITowerView
     
     public Mob currentTarget;
 
+    public GameObject gemSlot;
+
     void Start()
     {
         UpdateComponents();
@@ -27,6 +29,32 @@ public class TowerView: MonoBehaviour, ITowerView
     void Update()
     {
         
+    }
+
+
+    public void SetDisplayedGemToRarest()
+    {
+        if (model.gemsData.Count < 1)
+        {
+            return;
+        }
+
+        GemData rarestGem = model.gemsData[0]; ;
+
+        if (model.gemsData.Count == 1)
+        {
+            return;
+        }
+
+        //TODO a better sorting method for displayed gem
+        foreach (GemData gem in model.gemsData)
+        {
+            if (gem.rarity > rarestGem.rarity)
+            {
+                rarestGem = gem;
+            }
+        }
+
     }
 
     void UpdateComponents()
@@ -43,10 +71,6 @@ public class TowerView: MonoBehaviour, ITowerView
     void SetProjectileSource()
     {
         projectileSourceTransform = this.gameObject.transform.Find("ProjectileSource") as Transform;
-        if (projectileSourceTransform == null)
-        {
-            //Debug.Log("Didn't find projectile source");
-        }
     }
 
     public virtual void OnDrawGizmos()

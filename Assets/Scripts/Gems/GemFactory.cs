@@ -5,45 +5,116 @@ using UnityEditor;
 
 public static class GemFactory
 {
-    static GameObject baseGem;
-
-    // All projectiles should be loaded in here
+    static GameObject baseGemPrefab = Resources.Load<GameObject>("Prefabs/Gems/BaseGem");
     static GemFactory()
     {
-        baseGem = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Gems/BaseCommon", typeof(GameObject));
+
     }
 
     /// <summary>
-    /// Creates an Attack Damage Gem at spawner's location that is given the target
+    /// Creates an Attack Damage Gem
     /// </summary>
     /// <param name="damageIncrease">   - amount of damage the gem gives    </param>
-    /// <returns name="go">             - the attack damage gem             </returns>
-    public static Gem CreateAttackDamageGem(float damageIncrease)
+    /// <returns name="adGemObject">    - the attack damage gem             </returns>
+    /*public static GameObject CreateAttackDamageGem(float damageIncrease)
     {
-        FlatDamageGem gem = new FlatDamageGem(damageIncrease);
-        return gem;
+
     }
 
     /// <summary>
-    /// Creates an Attack Speed Gem at spawner's location that is given the target
+    /// Creates an Attack Speed Gem
     /// </summary>
     /// <param name="speedIncrease">    - amount of attack speed the gem gives  </param>
-    /// <returns name="go">             - the attack speed gem                  </returns>
-    public static Gem CreateAttackSpeedGem(float speedIncrease)
+    /// <returns name="asGemObject">    - the attack speed gem                  </returns>
+    public static GameObject CreateAttackSpeedGem(float speedIncrease)
     {
-        AttackSpeedGem gem = new AttackSpeedGem(speedIncrease);
-        return gem;
-    }
+        GameObject asGemObject = new GameObject();
+        asGemObject.AddComponent<AttackSpeedGem>();
+
+        AttackSpeedGem asGem = asGemObject.GetComponent<AttackSpeedGem>();\
+
+        return asGemObject;
+    }*/
 
     /// <summary>
-    /// Creates an Attack Speed Gem at spawner's location that is given the target
+    /// General factory for gem objects from GemData
     /// </summary>
-    /// <param name="speedIncrease">    - amount of attack speed the gem gives  </param>
-    /// <returns name="go">             - the attack speed gem                  </returns>
-    public static Gem CreateGemFromData(float speedIncrease)
+    /// <param name="_gemData">          - gem data to generate gem object from </param>
+    /// <returns name="go">             - the gem game object                  </returns>
+    public static GameObject CreateGemObject(GemData _gemData)
     {
-        AttackSpeedGem gem = new AttackSpeedGem(speedIncrease);
-        return gem;
+        GameObject go = new GameObject();
+        go.AddComponent<Gem>();
+        Gem goGem = go.GetComponent<Gem>();
+        goGem.gemData = _gemData;
+        goGem.sprite = SetSprite(goGem.gemData.rarity);
+        return go;
+    }
+
+    public static Sprite SetSprite(Rarity rarity)
+    {
+        Sprite sprite;
+        switch (rarity)
+        {
+            case Rarity.Common:
+                sprite = Resources.Load<Sprite>("Sprites / Gems / BaseCommonGem.png");
+                break;
+
+            case Rarity.Rare:
+                sprite = Resources.Load<Sprite>("Sprites / Gems / BaseRareGem.png");
+                break;
+
+            case Rarity.Epic:
+                sprite = Resources.Load<Sprite>("Sprites / Gems / BaseEpicGem.png");
+                break;
+
+            case Rarity.Legendary:
+                sprite = Resources.Load<Sprite>("Sprites / Gems / BaseLegendaryGem.png");
+                break;
+
+            case Rarity.Mythical:
+                sprite = Resources.Load<Sprite>("Sprites / Gems / BaseMythicalGem.png");
+                break;
+
+            default:
+                Debug.Log("This gem's rarity was never assigned");
+                sprite = Resources.Load<Sprite>("Sprites / Gems / BaseCommonGem.png");
+                break;
+        }
+        return sprite;
+    }
+    public static Color SetSpriteColor(Rarity rarity)
+    {
+        Color color;
+        switch (rarity)
+        {
+            case Rarity.Common:
+                color = Color.white;
+                break;
+
+            case Rarity.Rare:
+                color = Color.green;
+                break;
+
+            case Rarity.Epic:
+                color = Color.blue;
+                break;
+
+            case Rarity.Legendary:
+                color = new Color(1f, .64f, 0);
+                break;
+
+            case Rarity.Mythical:
+                color = new Color(.5f, 0, .5f);
+                break;
+
+            default:
+                Debug.Log("This gem's rarity was never assigned");
+                color = Color.gray;
+                break;
+        }
+
+        return color;
     }
 
 }

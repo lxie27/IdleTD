@@ -19,16 +19,24 @@ public class PlayerData
     public static PlayerData CreateDevSaveData()
     {
         PlayerData save = new PlayerData();
+        Debug.Log(save.towerInventory.Count);
+        Debug.Log(save.gemInventory.Count);
+
+        Modifier ad10 = ModifierFactory.CreateModifier(GemModifierTypes.AttackDamage, 10f);
+        GemData ad10Gem = new GemData(ad10);
+        save.gemInventory.Add(ad10Gem);
 
         TowerModel t1 = TowerModel.ModelFactory.CreateTowerModelFromType(TowerType.Basic);
-        t1.name = "Basic tower 1";
-        t1.stars = 5;
+        t1.attackSpeed = 1f;
+        t1.damage = 2f;
+        t1.name = "Basic tower w/ 10ADgem";
+
+        t1.AddGem(save.gemInventory[0]);
         TowerModel.ModelFactory.ApplyStarBonus(t1);
 
         TowerModel t2 = TowerModel.ModelFactory.CreateTowerModelFromType(TowerType.Basic);
         t2.name = "Basic tower 2";
-        t2.stars = 2;
-        TowerModel.ModelFactory.ApplyStarBonus(t2);
+        t2.stars = 0;
 
         TowerModel t3 = TowerModel.ModelFactory.CreateTowerModelFromType(TowerType.Ranged);
         t3.name = "Normal Range Tower";

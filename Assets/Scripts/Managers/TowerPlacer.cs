@@ -77,44 +77,6 @@ public class TowerPlacer : MonoBehaviour
         }
     }
 
-    /*void DisplayTowerPreview()
-    {
-        UndisplayTowerPreview();
-
-        TowerSlot selectedTowerSlot = selectedObject.
-            GetComponent<SelectTowerButton>().towerSlot.
-            GetComponent<TowerSlot>();
-        GameObject towerPreview = selectedTowerSlot.GenerateTowerPreview();
-        TowerModel towerModel = selectedTowerSlot.towerModel;
-
-        //Tower image preview
-        Utils.SetLayerRecursively(towerPreview, 5); //layer 5 is UI
-        towerPreview.transform.parent = towerDisplay.transform;
-        towerPreview.transform.localPosition = new Vector2(0, -30f);
-        towerPreview.transform.localScale = new Vector2(75, 75);
-
-        // Tower summary in text
-        towerSummary.text += "\n";
-        towerSummary.text += towerModel.name + "\n";
-        towerSummary.text += "Damage: " + towerModel.damage.ToString() + "\n";
-        towerSummary.text += "Radius: " + towerModel.radius.ToString() + "\n";
-        towerSummary.text += "Attack Speed: " + towerModel.attackSpeed.ToString() + "\n";
-        towerSummary.text += "Type: " + towerModel.type + "\n";
-    }
-
-    void UndisplayTowerPreview()
-    {
-        if (towerDisplay.transform.childCount > 0)
-        {
-            foreach (Transform child in towerDisplay.transform)
-            {
-                Destroy(child.gameObject);
-            }
-        }
-
-        towerSummary.text = "";
-    }*/
-
     void PlaceTower(TowerModel _model)
     {
         if (mouse.highlightedTile != null)
