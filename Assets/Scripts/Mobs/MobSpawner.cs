@@ -5,13 +5,14 @@ using UnityEngine;
 public class MobSpawner : MonoBehaviour
 {
     public List<Mob> mobs;
-    public float spawnDelay = 1f;
-
+    public float firstSpawnDelay;
+    public float spawnDelay;
     // Start is called before the first frame update
-    IEnumerator Start()
+    void Start()
     {
-        yield return new WaitForSeconds(0);
-        StartCoroutine(SpawnMobs(spawnDelay));
+        firstSpawnDelay = 3f;
+        spawnDelay = 3f;
+        InvokeRepeating("SpawnMobs", firstSpawnDelay, spawnDelay);
     }
 
     // Update is called once per frame
@@ -21,13 +22,9 @@ public class MobSpawner : MonoBehaviour
     }
 
     //Spawn then move
-    IEnumerator SpawnMobs(float delay)
+    void SpawnMobs()
     {
-        for (int i = 0; i < mobs.Count; i++)
-        {
-            Instantiate(mobs[i], this.transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(delay);
-        }
+        Instantiate(mobs[Random.Range(0, mobs.Count)], this.transform.position, Quaternion.identity);
     }
 
 }

@@ -31,7 +31,6 @@ public class TowerView: MonoBehaviour, ITowerView
         
     }
 
-
     public void SetDisplayedGemToRarest()
     {
         if (model.gemsData.Count < 1)
@@ -39,7 +38,7 @@ public class TowerView: MonoBehaviour, ITowerView
             return;
         }
 
-        GemData rarestGem = model.gemsData[0]; ;
+        GemData rarestGem = model.gemsData[0];
 
         if (model.gemsData.Count == 1)
         {
@@ -54,7 +53,6 @@ public class TowerView: MonoBehaviour, ITowerView
                 rarestGem = gem;
             }
         }
-
     }
 
     void UpdateComponents()

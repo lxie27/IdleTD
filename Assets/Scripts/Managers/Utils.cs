@@ -11,10 +11,34 @@ public static class Utils
         switch(_model.type)
         {
             case TowerType.Basic:
-                return AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Towers/BaseTower/BasicTowerHead.png");
+                return Resources.Load<Sprite>("Sprites/Towers/BasicTowerHead");
             case TowerType.Ranged:
-                return AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Towers/BaseTower/RangedTowerHead.png");
+                return Resources.Load<Sprite>("Sprites/Towers/RangedTowerHead");
             default:
+                return null;
+        }
+    }
+    public static Sprite GetIconFromGemData(GemData _gemData)
+    {
+        switch (_gemData.rarity)
+        {
+            case Rarity.Common:
+                return Resources.Load<Sprite>("Sprites/Gems/BaseCommonGem");
+
+            case Rarity.Rare:
+                return Resources.Load<Sprite>("Sprites/Gems/BaseRareGem");
+
+            case Rarity.Epic:
+                return Resources.Load<Sprite>("Sprites/Gems/BaseEpicGem");
+
+            case Rarity.Legendary:
+                return Resources.Load<Sprite>("Sprites/Gems/BaseLegendaryGem");
+
+            case Rarity.Mythical:
+                return Resources.Load<Sprite>("Sprites/Gems/BaseMythicalGem");
+
+            default:
+                Debug.Log("This gem's rarity was never assigned");
                 return null;
         }
     }

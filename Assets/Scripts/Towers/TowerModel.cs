@@ -100,7 +100,7 @@ public class TowerModel : ITowerModel
         public static void ApplyStarBonus(TowerModel _model)
         {
             _model.damage += _model.damage * (_model.stars * STARBONUS);
-            _model.attackSpeed = _model.attackSpeed * (_model.stars * STARBONUS);
+            _model.attackSpeed = _model.attackSpeed - (_model.stars * STARBONUS);
         }
     }
 }

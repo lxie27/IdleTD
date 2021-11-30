@@ -7,9 +7,9 @@ public class BaseProjectile : MonoBehaviour
     public GameObject target;
     public GameObject explosion;
 
-    protected float projectileSpeed;
-    protected float damage;
-    protected float radius;
+    public float projectileSpeed;
+    public float damage;
+    public float radius;
 
     public virtual void Start()
     {

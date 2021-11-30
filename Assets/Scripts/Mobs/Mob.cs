@@ -7,13 +7,18 @@ public enum Direction { NONE = 0, UP = 1, DOWN = 2, LEFT = 3, RIGHT = 4 };
 
 public class Mob : MonoBehaviour
 {
-    public float health = 10;
+    public float originalHealth;
+    public float currentHealth;
     public float speed = 3f;
 
     public bool isMoving = false;
     public List<Vector2> path;
     public int currentCell; //index of current position in path cell list
     Vector2 nextPosition, endPosition;
+
+    public GameObject currentHealthBar;
+    Vector3 currentHealthBarOriginalScale;
+    Vector3 currentHealthBarCurrentScale;
 
     Direction currentDirection;
     Animator anim;
@@ -23,6 +28,7 @@ public class Mob : MonoBehaviour
         MobInitialization();
     }
 
+    // General initialization every mob will do, used to dodged Start inheritance
     public void MobInitialization()
     {
         this.gameObject.tag = "Mob";
@@ -56,6 +62,9 @@ public class Mob : MonoBehaviour
             ac = anim.GetComponent<AnimatorController>();
             currentDirection = GetNextDirection();
         }
+
+        originalHealth = currentHealth;
+        currentHealthBarOriginalScale = currentHealthBar.transform.localScale;
     }
 
     public virtual void Update()
@@ -66,9 +75,10 @@ public class Mob : MonoBehaviour
         }
         else
         {
-            Destroy(this.gameObject);
+            Despawn();
         }
-        if (health <= 0)
+
+        if (currentHealth <= 0)
         {
             MobKilled();
         }
@@ -76,6 +86,11 @@ public class Mob : MonoBehaviour
 
     //  Function to contain any scorekeeping when mob dies
     public virtual void MobKilled()
+    {
+        Destroy(this.gameObject);
+    }
+
+    public virtual void Despawn()
     {
         Destroy(this.gameObject);
     }
@@ -130,14 +145,20 @@ public class Mob : MonoBehaviour
         anim.SetInteger("Direction", (int)currentDirection);
     }
 
-    public float TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
-        return health -= damage;
+        currentHealth -= damage;
+        ChangeHealthBar();
     }
 
     public virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(transform.position, transform.lossyScale);
+    }
+
+    void ChangeHealthBar()
+    {
+        currentHealthBar.transform.localScale = new Vector3((currentHealth / originalHealth) * currentHealthBarOriginalScale.x, 1, 1);
     }
 }

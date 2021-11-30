@@ -7,7 +7,7 @@ public class Slime : Mob
     // Start is called before the first frame update
     public override void Start()
     {
-        health = 10f;
+        currentHealth = 20f;
         speed = 2f;
 
         MobInitialization();

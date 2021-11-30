@@ -19,8 +19,6 @@ public class PlayerData
     public static PlayerData CreateDevSaveData()
     {
         PlayerData save = new PlayerData();
-        Debug.Log(save.towerInventory.Count);
-        Debug.Log(save.gemInventory.Count);
 
         Modifier ad10 = ModifierFactory.CreateModifier(GemModifierTypes.AttackDamage, 10f);
         GemData ad10Gem = new GemData(ad10);

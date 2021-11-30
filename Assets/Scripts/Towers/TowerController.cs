@@ -40,7 +40,7 @@ public class TowerController: MonoBehaviour
     {
         if (Time.time > cdTimer && view.currentTarget != null)
         {
-            ProjectileFactory.Spawn(view.projectileSourceTransform, view.currentTarget.transform);
+            ProjectileFactory.Spawn(view.projectileSourceTransform, view.currentTarget.transform, model);
             cdTimer = Time.time + model.attackSpeed;
         }
     }
